@@ -9,14 +9,14 @@ export const TimeFrameView = observer((props: { element: EditorElement }) => {
   const store = React.useContext(StoreContext);
   const { element } = props;
   const disabled = element.type === "audio";
-  const isSelected = store.selectedElement?.id === element.id;
+  const isSelected = store?.selectedElement?.id === element.id;
   const bgColorOnSelected = isSelected ? "bg-slate-800" : "bg-slate-600";
   const disabledCursor = disabled ? "cursor-no-drop" : "cursor-ew-resize";
 
   return (
     <div
       onClick={() => {
-        store.setSelectedElement(element);
+        store?.setSelectedElement(element);
       }}
       key={element.id}
       className={`relative width-full h-[25px] my-2 ${
@@ -25,11 +25,11 @@ export const TimeFrameView = observer((props: { element: EditorElement }) => {
     >
       <DragableView
         className="z-10"
-        value={element.timeFrame.start}
-        total={store.maxTime}
+        value={element.timeFrame.start ?? 0}
+        total={store?.maxTime ?? 0}
         disabled={disabled}
         onChange={(value) => {
-          store.updateEditorElementTimeFrame(element, {
+          store?.updateEditorElementTimeFrame(element, {
             start: value,
           });
         }}
@@ -41,19 +41,19 @@ export const TimeFrameView = observer((props: { element: EditorElement }) => {
 
       <DragableView
         className={disabled ? "cursor-no-drop" : "cursor-col-resize"}
-        value={element.timeFrame.start}
+        value={element.timeFrame.start ?? 0}
         disabled={disabled}
         style={{
           width: `${
-            ((element.timeFrame.end - element.timeFrame.start) /
-              store.maxTime) *
+            (((element.timeFrame.end ?? 0) - (element.timeFrame.start ?? 0)) /
+              (store?.maxTime ?? 1)) *
             100
           }%`,
         }}
-        total={store.maxTime}
+        total={store?.maxTime ?? 1}
         onChange={(value) => {
           const { start, end } = element.timeFrame;
-          store.updateEditorElementTimeFrame(element, {
+          store?.updateEditorElementTimeFrame(element, {
             start: value,
             end: value + (end - start),
           });
@@ -68,10 +68,10 @@ export const TimeFrameView = observer((props: { element: EditorElement }) => {
       <DragableView
         className="z-10"
         disabled={disabled}
-        value={element.timeFrame.end}
-        total={store.maxTime}
+        value={element.timeFrame.end ?? 0}
+        total={store?.maxTime ?? 1}
         onChange={(value) => {
-          store.updateEditorElementTimeFrame(element, {
+          store?.updateEditorElementTimeFrame(element, {
             end: value,
           });
         }}

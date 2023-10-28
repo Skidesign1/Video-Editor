@@ -10,14 +10,14 @@ export const AudioResourcesPanel = observer(() => {
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
-    store.addAudioResource(URL.createObjectURL(file));
+    store?.addAudioResource(URL.createObjectURL(file));
   };
   return (
     <>
       <div className="text-sm px-[16px] pt-[16px] pb-[8px] font-semibold">
         Add Audio
       </div>
-      {store.audios.map((audio, index) => {
+      {store?.audios.map((audio, index) => {
         return <AudioResource key={audio} audio={audio} index={index} />;
       })}
       <UploadButton

@@ -23,19 +23,23 @@ export const Menu = observer(() => {
         return (
           <button
             key={option.name}
-            onClick={() => option.action(store)}
+            onClick={() => {
+              if (store) {
+                option.action(store);
+              }
+            }}
             className="py-4 px-2 w-full flex flex-col items-center text-xs"
           >
             <option.icon
               className=""
               size="20"
               color={
-                store.selectedMenuOption === option.name ? "#00a0f5" : "black"
+                store?.selectedMenuOption === option.name ? "#00a0f5" : "black"
               }
             />
             <div
               className={
-                store.selectedMenuOption === option.name
+                store?.selectedMenuOption === option.name
                   ? "font-semibold"
                   : "font-light"
               }
@@ -54,56 +58,56 @@ const MENU_OPTIONS = [
     name: "Video",
     icon: MdVideoLibrary,
     action: (store: Store) => {
-      store.setSelectedMenuOption("Video");
+      store?.setSelectedMenuOption("Video");
     },
   },
   {
     name: "Audio",
     icon: MdAudiotrack,
     action: (store: Store) => {
-      store.setSelectedMenuOption("Audio");
+      store?.setSelectedMenuOption("Audio");
     },
   },
   {
     name: "Image",
     icon: MdImage,
     action: (store: Store) => {
-      store.setSelectedMenuOption("Image");
+      store?.setSelectedMenuOption("Image");
     },
   },
   {
     name: "Text",
     icon: MdTitle,
     action: (store: Store) => {
-      store.setSelectedMenuOption("Text");
+      store?.setSelectedMenuOption("Text");
     },
   },
   {
     name: "Animation",
     icon: MdTransform,
     action: (store: Store) => {
-      store.setSelectedMenuOption("Animation");
+      store?.setSelectedMenuOption("Animation");
     },
   },
   {
     name: "Effects",
     icon: MdMovieFilter,
     action: (store: Store) => {
-      store.setSelectedMenuOption("Effect");
+      store?.setSelectedMenuOption("Effect");
     },
   },
   {
     name: "Fill",
     icon: MdOutlineFormatColorFill,
     action: (store: Store) => {
-      store.setSelectedMenuOption("Fill");
+      store?.setSelectedMenuOption("Fill");
     },
   },
   {
     name: "Export",
     icon: MdDownload,
     action: (store: Store) => {
-      store.setSelectedMenuOption("Export");
+      store?.setSelectedMenuOption("Export");
     },
   },
 ];

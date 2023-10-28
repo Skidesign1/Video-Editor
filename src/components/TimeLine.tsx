@@ -7,7 +7,7 @@ import { TimeFrameView } from "./timeline-related/TimeFrameView";
 
 export const TimeLine = observer(() => {
   const store = React.useContext(StoreContext);
-  const percentOfCurrentTime = (store.currentTimeInMs / store.maxTime) * 100;
+  const percentOfCurrentTime = (store?.currentTimeInMs ?? 0) / (store?.maxTime ?? 1) * 100;
   return (
     <>
       <SeekPlayer />
@@ -18,7 +18,7 @@ export const TimeLine = observer(() => {
             left: `${percentOfCurrentTime}%`,
           }}
         ></div>
-        {store.editorElements.map((element) => {
+        {store?.editorElements.map((element) => {
           return <TimeFrameView key={element.id} element={element} />;
         })}
       </div>

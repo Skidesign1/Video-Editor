@@ -38,10 +38,10 @@ export const FillPanel = observer(() => {
       <div className="flex items-center justify-center">
         <BlockPicker
           colors={professionalVideoColors}
-          color={store.backgroundColor}
+          color={store?.backgroundColor}
           onChangeComplete={(color: any) => {
             console.log(color);
-            store.setBackgroundColor(color.hex);
+            store?.setBackgroundColor(color.hex);
           }}
         ></BlockPicker>
       </div>

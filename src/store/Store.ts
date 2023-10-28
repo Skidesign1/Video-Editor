@@ -149,54 +149,59 @@ export class Store {
             const clipRectangle = FabricUitls.getClipMaskRect(editorElement, 50);
             fabricObject.set('clipPath', clipRectangle)
           }
-          if(editorElement.type === "text" && animation.properties.textType === "character"){
-            this.canvas?.remove(...editorElement.properties.splittedTexts)
-            editorElement.properties.splittedTexts = getTextObjectsPartitionedByCharacters(editorElement.fabricObject,editorElement);
+          if (editorElement.type === "text" && animation.properties.textType === "character") {
+            if (editorElement.fabricObject) {
+              this.canvas?.remove(...editorElement.properties.splittedTexts);
+              editorElement.properties.splittedTexts = getTextObjectsPartitionedByCharacters(editorElement.fabricObject as fabric.Text, editorElement);
               editorElement.properties.splittedTexts.forEach((textObject) => {
-              this.canvas!.add(textObject);
-            })
-            const duration = animation.duration/2;
-            const delay = duration/editorElement.properties.splittedTexts.length;
-            for(let i = 0; i < editorElement.properties.splittedTexts.length; i++){
-              const splittedText = editorElement.properties.splittedTexts[i];
-              const offset =  {
-                left: splittedText.left! - editorElement.placement.x,
-                 top: splittedText.top! - editorElement.placement.y
+                this.canvas!.add(textObject);
+              });
+              const duration = animation.duration / 2;
+              const delay = duration / editorElement.properties.splittedTexts.length;
+              for (let i = 0; i < editorElement.properties.splittedTexts.length; i++) {
+                const splittedText = editorElement.properties.splittedTexts[i];
+                if (splittedText.left && splittedText.top && editorElement.placement.x && editorElement.placement.y) {
+                  const offset = {
+                    left: splittedText.left - editorElement.placement.x,
+                    top: splittedText.top - editorElement.placement.y
+                  };
+                  this.animationTimeLine.add({
+                    left: [startPosition.left! + offset.left, targetPosition.left + offset.left],
+                    top: [startPosition.top! + offset.top, targetPosition.top + offset.top],
+                    delay: i * delay,
+                    duration: duration,
+                    targets: splittedText,
+                  }, editorElement.timeFrame.start);
+                }
               }
               this.animationTimeLine.add({
-                left: [startPosition.left!+offset.left, targetPosition.left+offset.left],
-                top: [startPosition.top!+offset.top, targetPosition.top+offset.top],
-                delay: i*delay,
-                duration: duration,
-                targets: splittedText,
-              }, editorElement.timeFrame.start); 
+                opacity: [1, 0],
+                duration: 1,
+                targets: editorElement.fabricObject,
+                easing: 'linear',
+              }, editorElement.timeFrame.start);
+              this.animationTimeLine.add({
+                opacity: [0, 1],
+                duration: 1,
+                targets: editorElement.fabricObject,
+                easing: 'linear',
+              }, editorElement.timeFrame.start + animation.duration);
+          
+              this.animationTimeLine.add({
+                opacity: [0, 1],
+                duration: 1,
+                targets: editorElement.properties.splittedTexts,
+                easing: 'linear',
+              }, editorElement.timeFrame.start);
+              this.animationTimeLine.add({
+                opacity: [1, 0],
+                duration: 1,
+                targets: editorElement.properties.splittedTexts,
+                easing: 'linear',
+              }, editorElement.timeFrame.start + animation.duration);
             }
-            this.animationTimeLine.add({
-              opacity: [1, 0],
-              duration: 1,
-              targets: fabricObject,
-              easing: 'linear',
-            }, editorElement.timeFrame.start);
-            this.animationTimeLine.add({
-              opacity: [0, 1],
-              duration: 1,
-              targets: fabricObject,
-              easing: 'linear',
-            }, editorElement.timeFrame.start+animation.duration);
-
-            this.animationTimeLine.add({
-              opacity: [0, 1],
-              duration: 1,
-              targets: editorElement.properties.splittedTexts,
-              easing: 'linear',
-            }, editorElement.timeFrame.start);
-            this.animationTimeLine.add({
-              opacity: [1, 0],
-              duration: 1,
-              targets: editorElement.properties.splittedTexts,
-              easing: 'linear',
-            }, editorElement.timeFrame.start+animation.duration);
           }
+          
           this.animationTimeLine.add({
             left: [startPosition.left, targetPosition.left],
             top: [startPosition.top, targetPosition.top],
@@ -651,11 +656,11 @@ export class Store {
 
   refreshElements() {
     const store = this;
-    if (!store.canvas) return;
-    const canvas = store.canvas;
-    store.canvas.remove(...store.canvas.getObjects());
-    for (let index = 0; index < store.editorElements.length; index++) {
-      const element = store.editorElements[index];
+    if (!store?.canvas) return;
+    const canvas = store?.canvas;
+    store?.canvas.remove(...store?.canvas.getObjects());
+    for (let index = 0; index < store?.editorElements.length; index++) {
+      const element = store?.editorElements[index];
       switch (element.type) {
         case "video": {
           console.log("elementid", element.properties.elementId);
@@ -682,7 +687,7 @@ export class Store {
             selectable: true,
             lockUniScaling: true,
             // filters: filters,
-            customFilter: element.properties.effect.type,
+            // customFilter: element.properties.effect.type,
           });
 
           element.fabricObject = videoObject;
@@ -716,7 +721,7 @@ export class Store {
               ...element,
               placement: newPlacement,
             };
-            store.updateEditorElement(newElement);
+            store?.updateEditorElement(newElement);
           });
           break;
         }
@@ -739,8 +744,8 @@ export class Store {
             objectCaching: false,
             selectable: true,
             lockUniScaling: true,
-            // filters
-            customFilter: element.properties.effect.type,
+            filters: [new fabric.Image.filters.Grayscale()]
+            // customFilter: element.properties.effect.type,
           });
           // imageObject.applyFilters();
           element.fabricObject = imageObject;
@@ -784,7 +789,7 @@ export class Store {
               ...element,
               placement: newPlacement,
             };
-            store.updateEditorElement(newElement);
+            store?.updateEditorElement(newElement);
           });
           break;
         }
@@ -834,7 +839,7 @@ export class Store {
                 text: target?.text,
               },
             };
-            store.updateEditorElement(newElement);
+            store?.updateEditorElement(newElement);
           });
           break;
         }
@@ -844,17 +849,17 @@ export class Store {
       }
       if (element.fabricObject) {
         element.fabricObject.on("selected", function (e) {
-          store.setSelectedElement(element);
+          store?.setSelectedElement(element);
         });
       }
     }
-    const selectedEditorElement = store.selectedElement;
+    const selectedEditorElement = store?.selectedElement;
     if (selectedEditorElement && selectedEditorElement.fabricObject) {
       canvas.setActiveObject(selectedEditorElement.fabricObject);
     }
     this.refreshAnimations();
     this.updateTimeTo(this.currentTimeInMs);
-    store.canvas.renderAll();
+    store?.canvas.renderAll();
   }
 
 }
@@ -878,7 +883,7 @@ export function isEditorImageElement(
 }
 
 
-function getTextObjectsPartitionedByCharacters(textObject: fabric.Text, element:TextEditorElement):fabric.Text[]{
+function getTextObjectsPartitionedByCharacters(textObject: fabric.Text, element: TextEditorElement): fabric.Text[] {
   let copyCharsObjects: fabric.Text[] = [];
   // replace all line endings with blank
   const characters = (textObject.text ?? "").split('').filter((m) => m !== '\n');

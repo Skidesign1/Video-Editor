@@ -34,7 +34,7 @@ export const AnimationResource = observer((props: AnimationResourceProps) => {
         </div>
         <button
           className="hover:bg-[#00a0f5] bg-[rgba(0,0,0,.25)] rounded z-10 text-white font-bold py-1 text-lg"
-          onClick={() => store.removeAnimation(props.animation.id)}
+          onClick={() => store?.removeAnimation(props.animation.id)}
         >
           <MdDelete size="25" />
         </button>
@@ -74,7 +74,7 @@ export const FadeAnimation = observer(
               if (newDuration < 10) {
                 newDuration = 10;
               }
-              store.updateAnimation(props.animation.id, {
+              store?.updateAnimation(props.animation.id, {
                 ...props.animation,
                 duration: newDuration,
               });
@@ -107,7 +107,7 @@ export const SlideAnimation = observer(
               if (newDuration < 10) {
                 newDuration = 10;
               }
-              store.updateAnimation(props.animation.id, {
+              store?.updateAnimation(props.animation.id, {
                 ...props.animation,
                 duration: newDuration,
               });
@@ -120,7 +120,7 @@ export const SlideAnimation = observer(
             className="bg-slate-100 text-black rounded-lg px-2 py-1 ml-2 w-16 text-xs"
             value={props.animation.properties.direction}
             onChange={(e) => {
-              store.updateAnimation(props.animation.id, {
+              store?.updateAnimation(props.animation.id, {
                 ...props.animation,
                 properties: {
                   ...props.animation.properties,
@@ -142,7 +142,7 @@ export const SlideAnimation = observer(
             type="checkbox"
             checked={props.animation.properties.useClipPath}
             onChange={(e) => {
-              store.updateAnimation(props.animation.id, {
+              store?.updateAnimation(props.animation.id, {
                 ...props.animation,
                 properties: {
                   ...props.animation.properties,
@@ -158,7 +158,7 @@ export const SlideAnimation = observer(
             className="bg-slate-100 text-black rounded-lg px-2 py-1 ml-2 w-16 text-xs"
             value={props.animation.properties.textType}
             onChange={(e) => {
-              store.updateAnimation(props.animation.id, {
+              store?.updateAnimation(props.animation.id, {
                 ...props.animation,
                 properties: {
                   ...props.animation.properties,

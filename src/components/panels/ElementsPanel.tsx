@@ -12,7 +12,7 @@ export const ElementsPanel = observer((_props: {}) => {
         <div className="text-sm px-[16px] py-[7px] font-semibold">Elements</div>
       </div>
       <div className="flex flex-col">
-        {store.editorElements.map((element) => {
+        {store?.editorElements.map((element) => {
           return <Element key={element.id} element={element} />;
         })}
       </div>

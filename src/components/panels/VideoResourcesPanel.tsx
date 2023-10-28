@@ -10,14 +10,14 @@ export const VideoResourcesPanel = observer(() => {
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
-    store.addVideoResource(URL.createObjectURL(file));
+    store?.addVideoResource(URL.createObjectURL(file));
   };
   return (
     <>
       <div className="text-sm px-[16px] pt-[16px] pb-[8px] font-semibold">
         Add Video
       </div>
-      {store.videos.map((video, index) => {
+      {store?.videos.map((video, index) => {
         return <VideoResource key={video} video={video} index={index} />;
       })}
       <UploadButton

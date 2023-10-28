@@ -3,12 +3,10 @@ import { Editor } from "../../components/Editor";
 
 function EditorPage() {
   return (
-    <StoreProvider>
-      <Editor></Editor>
-    </StoreProvider>
+    // <StoreProvider>
+      <Editor/>
+    // </StoreProvider>
   );
 }
-
-EditorPage.diplsayName = "EditorPage";
 
 export default EditorPage;

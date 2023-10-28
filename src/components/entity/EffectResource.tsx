@@ -30,7 +30,7 @@ export const EffectResource = observer((props: EffectResourceProps) => {
         value={props.editorElement.properties.effect.type}
         onChange={(e) => {
           const type = e.target.value;
-          store.updateEffect(props.editorElement.id, {
+          store?.updateEffect(props.editorElement.id, {
             type: type as EffecType,
           });
         }}

@@ -7,25 +7,25 @@ import { getUid } from "@/utils";
 
 export const AnimationsPanel = observer(() => {
   const store = React.useContext(StoreContext);
-  const selectedElement = store.selectedElement;
-  const selectedElementAnimations = store.animations.filter((animation) => {
+  const selectedElement = store?.selectedElement;
+  const selectedElementAnimations = store?.animations.filter((animation) => {
     return animation.targetId === selectedElement?.id;
   });
-  const hasFadeInAnimation = selectedElementAnimations.some((animation) => {
+  const hasFadeInAnimation = selectedElementAnimations?.some((animation) => {
     return animation.type === "fadeIn";
   });
-  const hasFadeOutAnimation = selectedElementAnimations.some((animation) => {
+  const hasFadeOutAnimation = selectedElementAnimations?.some((animation) => {
     return animation.type === "fadeOut";
   });
 
-  const hasSlideInAnimation = selectedElementAnimations.some((animation) => {
+  const hasSlideInAnimation = selectedElementAnimations?.some((animation) => {
     return animation.type === "slideIn";
   });
-  const hasSlideOutAnimation = selectedElementAnimations.some((animation) => {
+  const hasSlideOutAnimation = selectedElementAnimations?.some((animation) => {
     return animation.type === "slideOut";
   });
 
-  const hasConsantAnimation = selectedElementAnimations.some((animation) => {
+  const hasConsantAnimation = selectedElementAnimations?.some((animation) => {
     return animation.type === "breathe";
   });
 
@@ -38,7 +38,7 @@ export const AnimationsPanel = observer(() => {
         <div
           className="text-sm px-[16px] py-[8px] font-semibold hover:bg-slate-700 hover:text-white cursor-pointer"
           onClick={() => {
-            store.addAnimation({
+            store?.addAnimation({
               id: getUid(),
               type: "fadeIn",
               targetId: selectedElement?.id ?? "",
@@ -54,7 +54,7 @@ export const AnimationsPanel = observer(() => {
         <div
           className="text-sm px-[16px] py-[8px] font-semibold hover:bg-slate-700 hover:text-white cursor-pointer"
           onClick={() => {
-            store.addAnimation({
+            store?.addAnimation({
               id: getUid(),
               type: "fadeOut",
               targetId: selectedElement?.id ?? "",
@@ -70,7 +70,7 @@ export const AnimationsPanel = observer(() => {
         <div
           className="text-sm px-[16px] py-[8px] font-semibold hover:bg-slate-700 hover:text-white cursor-pointer"
           onClick={() => {
-            store.addAnimation({
+            store?.addAnimation({
               id: getUid(),
               type: "slideIn",
               targetId: selectedElement?.id ?? "",
@@ -90,7 +90,7 @@ export const AnimationsPanel = observer(() => {
         <div
           className="text-sm px-[16px] py-[8px] font-semibold hover:bg-slate-700 hover:text-white cursor-pointer"
           onClick={() => {
-            store.addAnimation({
+            store?.addAnimation({
               id: getUid(),
               type: "slideOut",
               targetId: selectedElement?.id ?? "",
@@ -110,7 +110,7 @@ export const AnimationsPanel = observer(() => {
         <div
           className="text-sm px-[16px] py-[8px] font-semibold hover:bg-slate-700 hover:text-white cursor-pointer"
           onClick={() => {
-            store.addAnimation({
+            store?.addAnimation({
               id: getUid(),
               type: "breathe",
               targetId: selectedElement?.id ?? "",
@@ -122,7 +122,7 @@ export const AnimationsPanel = observer(() => {
           Add Breathing
         </div>
       ) : null}
-      {selectedElementAnimations.map((animation) => {
+      {selectedElementAnimations?.map((animation) => {
         return <AnimationResource key={animation.id} animation={animation} />;
       })}
     </>

@@ -10,14 +10,14 @@ export const ImageResourcesPanel = observer(() => {
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
-    store.addImageResource(URL.createObjectURL(file));
+    store?.addImageResource(URL.createObjectURL(file));
   };
   return (
     <>
       <div className="text-sm px-[16px] pt-[16px] pb-[8px] font-semibold">
         Add Image
       </div>
-      {store.images.map((image, index) => {
+      {store?.images.map((image, index) => {
         return <ImageResource key={image} image={image} index={index} />;
       })}
       <UploadButton

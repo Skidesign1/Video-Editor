@@ -1,4 +1,4 @@
-import React, { MouseEventHandler, useEffect, useRef } from "react";
+import React, { MouseEventHandler, useCallback, useEffect, useRef } from "react";
 
 function DragableView(props: {
   children?: React.ReactNode;
@@ -33,7 +33,7 @@ function DragableView(props: {
     data.isDragging = true;
     data.initialMouseX = event.clientX;
   };
-  const handleMouseMove: MouseEventHandler<HTMLDivElement> = (event) => {
+  const handleMouseMove = useCallback((event: React.MouseEvent<HTMLDivElement>) => {
     if (!data.div) return;
     if (!data.isDragging) return;
     data.div.style.left = `${
@@ -41,16 +41,17 @@ function DragableView(props: {
     }%`;
     event.stopPropagation();
     event.preventDefault();
-  };
+  }, [data.div, data.isDragging, props.total]);
 
-  const handleMouseUp: MouseEventHandler<HTMLDivElement> = (event) => {
+  const handleMouseUp = useCallback((event: React.MouseEvent<HTMLDivElement>) => {
     if (!data.div) return;
     if (!data.isDragging) return;
     data.isDragging = false;
     props.onChange(calculateNewValue(event.clientX));
     event.stopPropagation();
     event.preventDefault();
-  };
+  }, [data.div, data.isDragging, props.onChange]);
+
 
   useEffect(() => {
     window.addEventListener("mouseup", handleMouseUp as any);

@@ -21,7 +21,7 @@ export const ImageResource = observer(
         </div>
         <button
           className="hover:bg-[#00a0f5] bg-[rgba(0,0,0,.25)] rounded z-10 text-white font-bold py-1 absolute text-lg bottom-2 right-2"
-          onClick={() => store.addImage(index)}
+          onClick={() => store?.addImage(index)}
         >
           <MdAdd size="25" />
         </button>
@@ -38,6 +38,7 @@ export const ImageResource = observer(
           height={200}
           width={200}
           id={`image-${index}`}
+          alt=""
         ></img>
       </div>
     );

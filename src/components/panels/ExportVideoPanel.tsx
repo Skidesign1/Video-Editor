@@ -18,10 +18,12 @@ export const ExportVideoPanel = observer(() => {
           <input
             type="number"
             className="rounded text-center border-slate-200 placeholder-slate-400 contrast-more:border-slate-400 contrast-more:placeholder-slate-500 max-w-[50px] mr-2"
-            value={store.maxTime / 1000}
+            value={(store?.maxTime ?? 0) / 1000}
             onChange={(e) => {
               const value = e.target.value;
-              store.setMaxTime(Number(value) * 1000);
+              if (store) {
+                store.setMaxTime(Number(value) * 1000);
+              }
             }}
           />
           <div>secs</div>
@@ -33,18 +35,21 @@ export const ExportVideoPanel = observer(() => {
       </div>
 
       <button
-        className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-1 px-1 rounded-lg m-4"
-        onClick={() => {
-          store.handleSeek(0);
-          store.setSelectedElement(null);
-          setTimeout(() => {
-            store.setPlaying(true);
-            store.saveCanvasToVideoWithAUdio();
-          }, 1000);
-        }}
-      >
-        Export Video ({store.maxTime / 1000} secs)
-      </button>
+  className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-1 px-1 rounded-lg m-4"
+  onClick={() => {
+    if (store) {
+      store.handleSeek(0);
+      store.setSelectedElement(null);
+      setTimeout(() => {
+        store.setPlaying(true);
+        store.saveCanvasToVideoWithAUdio();
+      }, 1000);
+    }
+  }}
+>
+  Export Video ({(store?.maxTime ?? 0) / 1000} secs)
+</button>
+
     </>
   );
 });

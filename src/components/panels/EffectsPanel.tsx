@@ -7,7 +7,7 @@ import { isEditorImageElement, isEditorVideoElement } from "@/store/Store";
 
 export const EffectsPanel = observer(() => {
   const store = React.useContext(StoreContext);
-  const selectedElement = store.selectedElement;
+  const selectedElement = store?.selectedElement;
   return (
     <>
       <div className="text-sm px-[16px] pt-[16px] pb-[8px] font-semibold">

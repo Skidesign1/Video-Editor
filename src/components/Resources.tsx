@@ -13,7 +13,7 @@ import { EffectsPanel } from "./panels/EffectsPanel";
 
 export const Resources = observer(() => {
   const store = React.useContext(StoreContext);
-  const selectedMenuOption = store.selectedMenuOption;
+  const selectedMenuOption = store?.selectedMenuOption;
   return (
     <>
       {selectedMenuOption === "Video" ? <VideoResourcesPanel /> : null}
