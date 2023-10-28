@@ -1,12 +1,9 @@
+// next.config.js
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  webpack: (config) => {
-    config.externals.push({
-      sharp: "commonjs sharp",
-      canvas: "commonjs canvas",
-    });
-    return config;
+  experimental: {
+    serverComponentsExternalPackages: ['fabric'],
   },
 };
 
-module.exports = nextConfig;
+export default nextConfig;
