@@ -3,9 +3,9 @@ import { Editor } from "../../components/Editor";
 
 function EditorPage() {
   return (
-    // <StoreProvider>
+    <StoreProvider>
       <Editor/>
-    // </StoreProvider>
+    </StoreProvider>
   );
 }
 
