@@ -2,7 +2,7 @@ import { makeAutoObservable } from 'mobx';
 import { fabric } from 'fabric';
 import { getUid, isHtmlAudioElement, isHtmlImageElement, isHtmlVideoElement } from '@/utils';
 import anime, { get } from 'animejs';
-import { MenuOption, EditorElement, Animation, TimeFrame, VideoEditorElement, AudioEditorElement, Placement, ImageEditorElement, Effect, TextEditorElement } from '../types';
+import { MenuOption, EditorElement, Animation, TimeFrame, VideoEditorElement, ShapeEditorElement, AudioEditorElement, Placement, ImageEditorElement, Effect, TextEditorElement } from '../types';
 import { FabricUitls } from '@/utils/fabric-utils';
 
 export class Store {
@@ -14,6 +14,7 @@ export class Store {
   audios: string[]
   videos: string[]
   images: string[]
+  shapes: string[]
   editorElements: EditorElement[]
   selectedElement: EditorElement | null;
 
@@ -30,6 +31,7 @@ export class Store {
     this.videos = [];
     this.images = [];
     this.audios = [];
+    this.shapes = [];
     this.editorElements = [];
     this.backgroundColor = '#111111';
     this.maxTime = 30 * 1000;
@@ -538,6 +540,40 @@ export class Store {
           fontSize: options.fontSize,
           fontWeight: options.fontWeight,
           splittedTexts: [],
+        },
+      },
+    );
+  }
+
+  addShape(options: {
+    fill: string;
+    width: number;
+    height: number;
+  }) {
+    const id = getUid();
+    const index = this.editorElements.length;
+    this.addEditorElement(
+      {
+        id,
+        name: `Shape ${index + 1}`,
+        type: "shapes",
+        placement: {
+          x: 50,
+          y: 50,
+          width: 100,
+          height: 100,
+          rotation: 0,
+          scaleX: 1,
+          scaleY: 1,
+        },
+        timeFrame: {
+          start: 0,
+          end: this.maxTime,
+        },
+        properties: {
+          fill: options.fill,
+          width: options.width,
+          height: options.height,
         },
       },
     );

@@ -11,6 +11,7 @@ import {
   MdAudiotrack,
   MdOutlineFormatColorFill,
   MdMovieFilter,
+  MdControlPoint,
 } from "react-icons/md";
 import { Store } from "@/store/Store";
 
@@ -101,6 +102,13 @@ const MENU_OPTIONS = [
     icon: MdOutlineFormatColorFill,
     action: (store: Store) => {
       store?.setSelectedMenuOption("Fill");
+    },
+  },
+  {
+    name: "Shapes",
+    icon: MdOutlineFormatColorFill,
+    action: (store: Store) => {
+      store?.setSelectedMenuOption("Shapes");
     },
   },
   {

@@ -17,6 +17,14 @@ export type ImageEditorElement = EditorElementBase<
   "image",
   { src: string; elementId: string; imageObject?: fabric.Object, effect: Effect }
 >;
+export type ShapeEditorElement = EditorElementBase<
+  "shapes",
+  { 
+    fill: string;
+    width: number;
+    height: number;
+   }
+>;
 
 export type AudioEditorElement = EditorElementBase<
   "audio",
@@ -36,7 +44,8 @@ export type EditorElement =
   | VideoEditorElement
   | ImageEditorElement
   | AudioEditorElement
-  | TextEditorElement;
+  | TextEditorElement
+  | ShapeEditorElement;
 
 export type Placement = {
   x: number;
@@ -107,4 +116,5 @@ export type MenuOption =
   | "Export"
   | "Animation"
   | "Effect"
-  | "Fill";
+  | "Fill"
+  | "Shapes";
