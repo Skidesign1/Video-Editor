@@ -18,11 +18,12 @@ export type ImageEditorElement = EditorElementBase<
   { src: string; elementId: string; imageObject?: fabric.Object, effect: Effect }
 >;
 export type ShapeEditorElement = EditorElementBase<
-  "rect" | 'ellipse',
+  "rect" | 'circle' | 'triangle',
   { 
     fill: string;
     width: number;
     height: number;
+    radius: number;
    }
 >;
 

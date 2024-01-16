@@ -5,12 +5,13 @@ import { observer } from "mobx-react";
 import { MdAdd } from "react-icons/md";
 
 type ShapeResourceProps = {
-    type: 'rect' | 'ellipse',  // You can extend this for other shapes
+    type: 'rect' | 'circle' | 'triangle',  // You can extend this for other shapes
     width: number,
     height: number,
     fill: string,
     stroke: string,
     strokeWidth: number,
+    radius: number,
 };
 export const ShapeResource = observer(
     ({ type,  // You can extend this for other shapes
@@ -18,7 +19,7 @@ export const ShapeResource = observer(
         height,
         fill,
         stroke,
-        strokeWidth, }: ShapeResourceProps) => {
+        strokeWidth, radius }: ShapeResourceProps) => {
         const store = React.useContext(StoreContext);
         return (
             <div className="items-center bg-slate-800 m-[15px] flex flex-row">
@@ -40,6 +41,7 @@ export const ShapeResource = observer(
                             fill: fill,
                             stroke: stroke,
                             strokeWidth: strokeWidth,
+                            radius: radius,
                         })
                     }
                 >

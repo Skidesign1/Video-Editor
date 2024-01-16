@@ -546,12 +546,13 @@ export class Store {
   }
 
   addShape(options: {
-    type: 'rect' | 'ellipse',  // You can extend this for other shapes
+    type: 'rect' | 'circle' | 'triangle',  // You can extend this for other shapes
     width: number,
     height: number,
     fill: string,
     stroke: string,
     strokeWidth: number,
+    radius: number,
   }) {
     const id = getUid();
     const index = this.editorElements.length;
@@ -571,18 +572,27 @@ export class Store {
           strokeWidth: options.strokeWidth,
         });
         break;
-      case 'ellipse':
-        shape = new fabric.Ellipse({
+      case 'circle':
+        shape = new fabric.Circle({
           left: 0,
           top: 0,
-          rx: options.width / 2,  // rx and ry for ellipse
-          ry: options.height / 2,
+          radius: options.radius,
           fill: options.fill,
           stroke: options.stroke,
           strokeWidth: options.strokeWidth,
         });
         break;
-      // Add more cases for other shapes
+        case 'triangle':
+          shape = new fabric.Triangle({
+            left: 0,
+            top: 0,
+            width: options.width,
+            height: options.height,
+            fill: options.fill,
+            stroke: options.stroke,
+            strokeWidth: options.strokeWidth,
+          });
+          break;
 
       default:
         throw new Error(`Unsupported shape type: ${options.type}`);
@@ -610,6 +620,7 @@ export class Store {
           fill: options.fill,
           width: options.width,
           height: options.height,
+          radius: options.radius,
         },
       },
     );
@@ -922,8 +933,8 @@ export class Store {
             top: element.placement.y,
             scaleX: element.placement.scaleX,
             scaleY: element.placement.scaleY,
-            width: element.placement.width,
-            height: element.placement.height,
+            width: element.properties.width,
+            height: element.properties.height,
             angle: element.placement.rotation,
             fill: element.properties.fill,
             objectCaching: false,
@@ -955,27 +966,66 @@ export class Store {
           });
           break;
         }
-        case "ellipse": {
-          const ellipseObject = new fabric.Ellipse({
+        case "circle": {
+          const circleObject = new fabric.Circle({
             name: element.id,
             left: element.placement.x,
             top: element.placement.y,
             scaleX: element.placement.scaleX,
             scaleY: element.placement.scaleY,
-            width: element.placement.width,
-            height: element.placement.height,
+            angle: element.placement.rotation,
+            radius: element.properties.radius,
+            fill: element.properties.fill,
+            objectCaching: false,
+            selectable: true,
+            lockUniScaling: true,
+        });
+          element.fabricObject = circleObject;
+          canvas.add(circleObject);
+          canvas.on("object:modified", function (e) {
+            if (!e.target) return;
+            const target = e.target;
+            if (target != circleObject) return;
+            const placement = element.placement;
+            const newPlacement: Placement = {
+              ...placement,
+              x: target.left ?? placement.x,
+              y: target.top ?? placement.y,
+              rotation: target.angle ?? placement.rotation,
+              width: target.width ?? placement.width,
+              height: target.height ?? placement.height,
+              scaleX: target.scaleX ?? placement.scaleX,
+              scaleY: target.scaleY ?? placement.scaleY,
+            };
+            const newElement = {
+              ...element,
+              placement: newPlacement,
+            };
+            store?.updateEditorElement(newElement);
+          });
+          break;
+        }
+        case "triangle": {
+          const triangleObject = new fabric.Triangle({
+            name: element.id,
+            left: element.placement.x,
+            top: element.placement.y,
+            scaleX: element.placement.scaleX,
+            scaleY: element.placement.scaleY,
+            width: element.properties.width,
+            height: element.properties.height,
             angle: element.placement.rotation,
             fill: element.properties.fill,
             objectCaching: false,
             selectable: true,
             lockUniScaling: true,
         });
-          element.fabricObject = ellipseObject;
-          canvas.add(ellipseObject);
+          element.fabricObject = triangleObject;
+          canvas.add(triangleObject);
           canvas.on("object:modified", function (e) {
             if (!e.target) return;
             const target = e.target;
-            if (target != ellipseObject) return;
+            if (target != triangleObject) return;
             const placement = element.placement;
             const newPlacement: Placement = {
               ...placement,
