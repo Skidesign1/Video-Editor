@@ -555,6 +555,7 @@ export class Store {
   }) {
     const id = getUid();
     const index = this.editorElements.length;
+    const canvas = document.getElementById("canvas") as HTMLCanvasElement;
 
     let shape;
 
@@ -596,7 +597,7 @@ export class Store {
           x: 50,
           y: 50,
           width: options.width,
-          height: options.height ,
+          height: options.height,
           rotation: 0,
           scaleX: 1,
           scaleY: 1,
@@ -909,6 +910,86 @@ export class Store {
                 // @ts-ignore
                 text: target?.text,
               },
+            };
+            store?.updateEditorElement(newElement);
+          });
+          break;
+        }
+        case "rect": {
+          const rectObject = new fabric.Rect({
+            name: element.id,
+            left: element.placement.x,
+            top: element.placement.y,
+            scaleX: element.placement.scaleX,
+            scaleY: element.placement.scaleY,
+            width: element.placement.width,
+            height: element.placement.height,
+            angle: element.placement.rotation,
+            fill: element.properties.fill,
+            objectCaching: false,
+            selectable: true,
+            lockUniScaling: true,
+        });
+          element.fabricObject = rectObject;
+          canvas.add(rectObject);
+          canvas.on("object:modified", function (e) {
+            if (!e.target) return;
+            const target = e.target;
+            if (target != rectObject) return;
+            const placement = element.placement;
+            const newPlacement: Placement = {
+              ...placement,
+              x: target.left ?? placement.x,
+              y: target.top ?? placement.y,
+              rotation: target.angle ?? placement.rotation,
+              width: target.width ?? placement.width,
+              height: target.height ?? placement.height,
+              scaleX: target.scaleX ?? placement.scaleX,
+              scaleY: target.scaleY ?? placement.scaleY,
+            };
+            const newElement = {
+              ...element,
+              placement: newPlacement,
+            };
+            store?.updateEditorElement(newElement);
+          });
+          break;
+        }
+        case "ellipse": {
+          const ellipseObject = new fabric.Ellipse({
+            name: element.id,
+            left: element.placement.x,
+            top: element.placement.y,
+            scaleX: element.placement.scaleX,
+            scaleY: element.placement.scaleY,
+            width: element.placement.width,
+            height: element.placement.height,
+            angle: element.placement.rotation,
+            fill: element.properties.fill,
+            objectCaching: false,
+            selectable: true,
+            lockUniScaling: true,
+        });
+          element.fabricObject = ellipseObject;
+          canvas.add(ellipseObject);
+          canvas.on("object:modified", function (e) {
+            if (!e.target) return;
+            const target = e.target;
+            if (target != ellipseObject) return;
+            const placement = element.placement;
+            const newPlacement: Placement = {
+              ...placement,
+              x: target.left ?? placement.x,
+              y: target.top ?? placement.y,
+              rotation: target.angle ?? placement.rotation,
+              width: target.width ?? placement.width,
+              height: target.height ?? placement.height,
+              scaleX: target.scaleX ?? placement.scaleX,
+              scaleY: target.scaleY ?? placement.scaleY,
+            };
+            const newElement = {
+              ...element,
+              placement: newPlacement,
             };
             store?.updateEditorElement(newElement);
           });

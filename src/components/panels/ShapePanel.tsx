@@ -10,17 +10,7 @@ export const ShapePanel = observer(() => {
         Add Shape
       </div>
       <ShapeResource type="rect" width={50} height={50} fill="grey" stroke="black" strokeWidth={3}/>
-      <ShapeResource type="rect" width={50} height={50} fill="grey" stroke="black" strokeWidth={3}/>
-      <ShapeResource type="rect" width={50} height={50} fill="grey" stroke="black" strokeWidth={3}/>
-      <ShapeResource type="rect" width={50} height={50} fill="grey" stroke="black" strokeWidth={3}/>
-      <ShapeResource type="rect" width={50} height={50} fill="grey" stroke="black" strokeWidth={3}/>
-      <ShapeResource type="rect" width={50} height={50} fill="grey" stroke="black" strokeWidth={3}/>
-      <ShapeResource type="rect" width={50} height={50} fill="grey" stroke="black" strokeWidth={3}/>
-      <ShapeResource type="rect" width={50} height={50} fill="grey" stroke="black" strokeWidth={3}/>
-      <ShapeResource type="rect" width={50} height={50} fill="grey" stroke="black" strokeWidth={3}/>
-      <ShapeResource type="rect" width={50} height={50} fill="grey" stroke="black" strokeWidth={3}/>
-      <ShapeResource type="rect" width={50} height={50} fill="grey" stroke="black" strokeWidth={3}/>
-      <ShapeResource type="ellipse" width={50} height={50} fill="grey" stroke="black" strokeWidth={3}/>
+      <ShapeResource type="ellipse" width={100} height={100} fill="grey" stroke="black" strokeWidth={3}/>
     </div>
   );
 });
