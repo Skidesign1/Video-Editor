@@ -188,7 +188,7 @@ export class Store {
                 targets: editorElement.fabricObject,
                 easing: 'linear',
               }, editorElement.timeFrame.start + animation.duration);
-          
+
               this.animationTimeLine.add({
                 opacity: [0, 1],
                 duration: 1,
@@ -203,7 +203,7 @@ export class Store {
               }, editorElement.timeFrame.start + animation.duration);
             }
           }
-          
+
           this.animationTimeLine.add({
             left: [startPosition.left, targetPosition.left],
             top: [startPosition.top, targetPosition.top],
@@ -508,8 +508,8 @@ export class Store {
         }
       },
     );
-
   }
+
   addText(options: {
     text: string,
     fontSize: number,
@@ -546,22 +546,57 @@ export class Store {
   }
 
   addShape(options: {
-    fill: string;
-    width: number;
-    height: number;
+    type: 'rect' | 'ellipse',  // You can extend this for other shapes
+    width: number,
+    height: number,
+    fill: string,
+    stroke: string,
+    strokeWidth: number,
   }) {
     const id = getUid();
     const index = this.editorElements.length;
+
+    let shape;
+
+    switch (options.type) {
+      case 'rect':
+        shape = new fabric.Rect({
+          left: 0,
+          top: 0,
+          width: options.width,
+          height: options.height,
+          fill: options.fill,
+          stroke: options.stroke,
+          strokeWidth: options.strokeWidth,
+        });
+        break;
+      case 'ellipse':
+        shape = new fabric.Ellipse({
+          left: 0,
+          top: 0,
+          rx: options.width / 2,  // rx and ry for ellipse
+          ry: options.height / 2,
+          fill: options.fill,
+          stroke: options.stroke,
+          strokeWidth: options.strokeWidth,
+        });
+        break;
+      // Add more cases for other shapes
+
+      default:
+        throw new Error(`Unsupported shape type: ${options.type}`);
+    }
+
     this.addEditorElement(
       {
         id,
-        name: `Shape ${index + 1}`,
-        type: "shapes",
+        name: `${options.type.charAt(0).toUpperCase() + options.type.slice(1)} ${index + 1}`,
+        type: options.type,
         placement: {
           x: 50,
           y: 50,
-          width: 100,
-          height: 100,
+          width: options.width,
+          height: options.height ,
           rotation: 0,
           scaleX: 1,
           scaleY: 1,
@@ -928,7 +963,7 @@ function getTextObjectsPartitionedByCharacters(textObject: fabric.Text, element:
   const charObjectFixed = charObjects.map((m, index) => m.slice(0, m.length - 1).map(m => ({ m, index }))).flat();
   const lineHeight = textObject.getHeightOfLine(0);
   for (let i = 0; i < characters.length; i++) {
-    if(!charObjectFixed[i]) continue;
+    if (!charObjectFixed[i]) continue;
     const { m: charObject, index: lineIndex } = charObjectFixed[i];
     const char = characters[i];
     const scaleX = textObject.scaleX ?? 1;
@@ -940,7 +975,7 @@ function getTextObjectsPartitionedByCharacters(textObject: fabric.Text, element:
       top: lineIndex * lineHeight * scaleY + (element.placement.y),
       fontSize: textObject.fontSize,
       fontWeight: textObject.fontWeight,
-      fill : '#fff',
+      fill: '#fff',
     });
     copyCharsObjects.push(charTextObject);
   }
