@@ -12,6 +12,7 @@ type ShapeResourceProps = {
     stroke: string,
     strokeWidth: number,
     radius: number,
+    icon: any,
 };
 export const ShapeResource = observer(
     ({ type,  // You can extend this for other shapes
@@ -19,7 +20,7 @@ export const ShapeResource = observer(
         height,
         fill,
         stroke,
-        strokeWidth, radius }: ShapeResourceProps) => {
+        strokeWidth, radius, icon }: ShapeResourceProps) => {
         const store = React.useContext(StoreContext);
         return (
             <div className="items-center bg-slate-800 m-[15px] flex flex-row">
@@ -29,7 +30,7 @@ export const ShapeResource = observer(
                         fill: `${fill}`,
                     }}
                 >
-                    Add {type}
+                    {icon}
                 </div>
                 <button
                     className="hover:bg-[#00a0f5] bg-[rgba(0,0,0,.25)] rounded z-10 text-white font-bold py-1"
