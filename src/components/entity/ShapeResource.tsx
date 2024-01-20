@@ -5,7 +5,7 @@ import { observer } from "mobx-react";
 import { MdAdd } from "react-icons/md";
 
 type ShapeResourceProps = {
-    type: 'rect' | 'circle' | 'triangle',  // You can extend this for other shapes
+    type: 'rect' | 'circle' | 'triangle' | 'line',  // You can extend this for other shapes
     width: number,
     height: number,
     fill: string,

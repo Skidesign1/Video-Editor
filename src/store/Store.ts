@@ -546,7 +546,7 @@ export class Store {
   }
 
   addShape(options: {
-    type: 'rect' | 'circle' | 'triangle',  // You can extend this for other shapes
+    type: 'rect' | 'circle' | 'triangle' | 'line',  // You can extend this for other shapes
     width: number,
     height: number,
     fill: string,
@@ -593,6 +593,17 @@ export class Store {
             strokeWidth: options.strokeWidth,
           });
           break;
+        case 'line':
+        shape = new fabric.Line([50, 50, 250, 50], {
+          left: 0,
+          top: 0,
+          width: options.width,
+          height: options.height,
+          fill: options.fill,
+          stroke: options.stroke,
+          strokeWidth: options.strokeWidth,
+        });
+        break;
 
       default:
         throw new Error(`Unsupported shape type: ${options.type}`);
@@ -621,6 +632,8 @@ export class Store {
           width: options.width,
           height: options.height,
           radius: options.radius,
+          strokeWidth: options.strokeWidth,
+          stroke: options.stroke,
         },
       },
     );
@@ -1026,6 +1039,48 @@ export class Store {
             if (!e.target) return;
             const target = e.target;
             if (target != triangleObject) return;
+            const placement = element.placement;
+            const newPlacement: Placement = {
+              ...placement,
+              x: target.left ?? placement.x,
+              y: target.top ?? placement.y,
+              rotation: target.angle ?? placement.rotation,
+              width: target.width ?? placement.width,
+              height: target.height ?? placement.height,
+              scaleX: target.scaleX ?? placement.scaleX,
+              scaleY: target.scaleY ?? placement.scaleY,
+            };
+            const newElement = {
+              ...element,
+              placement: newPlacement,
+            };
+            store?.updateEditorElement(newElement);
+          });
+          break;
+        }
+        case "line": {
+          const lineObject = new fabric.Line([50, 50, 250, 50],{
+            name: element.id,
+            left: element.placement.x,
+            top: element.placement.y,
+            scaleX: element.placement.scaleX,
+            scaleY: element.placement.scaleY,
+            width: element.properties.width,
+            height: element.properties.height,
+            angle: element.placement.rotation,
+            fill: element.properties.fill,
+            stroke: element.properties.stroke,
+            strokeWidth: element.properties.strokeWidth,
+            objectCaching: false,
+            selectable: true,
+            lockUniScaling: true,
+        });
+          element.fabricObject = lineObject;
+          canvas.add(lineObject);
+          canvas.on("object:modified", function (e) {
+            if (!e.target) return;
+            const target = e.target;
+            if (target != lineObject) return;
             const placement = element.placement;
             const newPlacement: Placement = {
               ...placement,
