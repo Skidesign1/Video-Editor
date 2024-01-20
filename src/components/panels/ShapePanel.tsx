@@ -11,9 +11,9 @@ export const ShapePanel = observer(() => {
       <div className="text-sm px-[16px] pt-[16px] pb-[8px] font-semibold text-white">
         Add Shape
       </div>
-      <ShapeResource icon={<MdSquare />} type="rect" radius={0} width={50} height={50} fill="grey" stroke="black" strokeWidth={3}/>
-      <ShapeResource icon={<TbTriangleFilled />} type="triangle" radius={0} width={50} height={50} fill="grey" stroke="black" strokeWidth={3}/>
-      <ShapeResource icon={<MdCircle />} type="circle" width={50} height={50} radius={10} fill="grey" stroke="black" strokeWidth={3}/>
+      <ShapeResource icon={<MdSquare size="50" />} type="rect" radius={0} width={50} height={50} fill="grey" stroke="black" strokeWidth={3}/>
+      <ShapeResource icon={<TbTriangleFilled size="50"/>} type="triangle" radius={0} width={50} height={50} fill="grey" stroke="black" strokeWidth={3}/>
+      <ShapeResource icon={<MdCircle size="50" />} type="circle" width={50} height={50} radius={10} fill="grey" stroke="black" strokeWidth={3}/>
     </div>
   );
 });

@@ -12,7 +12,14 @@ export type ElementProps = {
 export const Element = observer((props: ElementProps) => {
   const store = React.useContext(StoreContext);
   const { element } = props;
-  const Icon = element.type === "video" ? MdMovie : MdOutlineTextFields;
+  let Icon: React.ReactNode;
+  if (element.type === "rect" || element.type === "triangle" || element.type === "circle") {
+    Icon = <img style={{backgroundColor: 'white', width:'20px', height:'20px'}} src='/shape-icon.svg' />;
+  } else if (element.type === "video") {
+    Icon = <MdMovie size="20" color="gray" />;
+  } else {
+    Icon = <MdOutlineTextFields size="20" color="gray" />;
+  }
   const isSelected = store?.selectedElement?.id === element.id;
   const bgColor = isSelected ? "rgba(0, 160, 245, 0.1)" : "";
   return (
@@ -26,7 +33,7 @@ export const Element = observer((props: ElementProps) => {
         store?.setSelectedElement(element);
       }}
     >
-      <Icon size="20" color="gray"></Icon>
+       {Icon}
       <div className="truncate text-xs ml-2 flex-1 font-medium">
         {element.name}
       </div>
