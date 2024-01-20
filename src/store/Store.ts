@@ -546,7 +546,7 @@ export class Store {
   }
 
   addShape(options: {
-    type: 'rect' | 'circle' | 'triangle' | 'line',  // You can extend this for other shapes
+    type: 'rect' | 'circle' | 'triangle' | 'line' | 'polygon',  // You can extend this for other shapes
     width: number,
     height: number,
     fill: string,
@@ -582,18 +582,18 @@ export class Store {
           strokeWidth: options.strokeWidth,
         });
         break;
-        case 'triangle':
-          shape = new fabric.Triangle({
-            left: 0,
-            top: 0,
-            width: options.width,
-            height: options.height,
-            fill: options.fill,
-            stroke: options.stroke,
-            strokeWidth: options.strokeWidth,
-          });
-          break;
-        case 'line':
+      case 'triangle':
+        shape = new fabric.Triangle({
+          left: 0,
+          top: 0,
+          width: options.width,
+          height: options.height,
+          fill: options.fill,
+          stroke: options.stroke,
+          strokeWidth: options.strokeWidth,
+        });
+        break;
+      case 'line':
         shape = new fabric.Line([50, 50, 250, 50], {
           left: 0,
           top: 0,
@@ -603,6 +603,31 @@ export class Store {
           stroke: options.stroke,
           strokeWidth: options.strokeWidth,
         });
+        break;
+      case 'polygon':
+        shape = new fabric.Polygon(
+          [{
+            x: 150,
+            y: 50
+          }, {
+            x: 225,
+            y: 150
+          }, {
+            x: 150,
+            y: 250
+          }, {
+            x: 75,
+            y: 150
+          }],
+          {
+            left: 0,
+            top: 0,
+            width: options.width,
+            height: options.height,
+            fill: options.fill,
+            stroke: options.stroke,
+            strokeWidth: options.strokeWidth,
+          });
         break;
 
       default:
@@ -953,7 +978,7 @@ export class Store {
             objectCaching: false,
             selectable: true,
             lockUniScaling: true,
-        });
+          });
           element.fabricObject = rectObject;
           canvas.add(rectObject);
           canvas.on("object:modified", function (e) {
@@ -992,7 +1017,7 @@ export class Store {
             objectCaching: false,
             selectable: true,
             lockUniScaling: true,
-        });
+          });
           element.fabricObject = circleObject;
           canvas.add(circleObject);
           canvas.on("object:modified", function (e) {
@@ -1032,7 +1057,7 @@ export class Store {
             objectCaching: false,
             selectable: true,
             lockUniScaling: true,
-        });
+          });
           element.fabricObject = triangleObject;
           canvas.add(triangleObject);
           canvas.on("object:modified", function (e) {
@@ -1059,7 +1084,7 @@ export class Store {
           break;
         }
         case "line": {
-          const lineObject = new fabric.Line([50, 50, 250, 50],{
+          const lineObject = new fabric.Line([50, 50, 250, 50], {
             name: element.id,
             left: element.placement.x,
             top: element.placement.y,
@@ -1074,13 +1099,69 @@ export class Store {
             objectCaching: false,
             selectable: true,
             lockUniScaling: true,
-        });
+          });
           element.fabricObject = lineObject;
           canvas.add(lineObject);
           canvas.on("object:modified", function (e) {
             if (!e.target) return;
             const target = e.target;
             if (target != lineObject) return;
+            const placement = element.placement;
+            const newPlacement: Placement = {
+              ...placement,
+              x: target.left ?? placement.x,
+              y: target.top ?? placement.y,
+              rotation: target.angle ?? placement.rotation,
+              width: target.width ?? placement.width,
+              height: target.height ?? placement.height,
+              scaleX: target.scaleX ?? placement.scaleX,
+              scaleY: target.scaleY ?? placement.scaleY,
+            };
+            const newElement = {
+              ...element,
+              placement: newPlacement,
+            };
+            store?.updateEditorElement(newElement);
+          });
+          break;
+        }
+        case "polygon": {
+          const polyObject = new fabric.Polygon(
+            [{
+              x: 150,
+              y: 50
+           }, {
+              x: 225,
+              y: 150
+           }, {
+              x: 150,
+              y: 250
+           }, {
+              x: 75,
+              y: 150
+           }],
+             {
+            name: element.id,
+            left: element.placement.x,
+            top: element.placement.y,
+            scaleX: element.placement.scaleX,
+            scaleY: element.placement.scaleY,
+            width: element.properties.width,
+            height: element.properties.height,
+            angle: element.placement.rotation,
+            fill: element.properties.fill,
+            stroke: element.properties.stroke,
+            strokeWidth: element.properties.strokeWidth,
+            objectCaching: false,
+            selectable: true,
+            lockUniScaling: true,
+          });
+          element.fabricObject = polyObject;
+          canvas.add(polyObject);
+          canvas.on("object:modified", function (e) {
+            if (!e.target) return;
+            const target = e.target;
+            if (target != polyObject) return;
             const placement = element.placement;
             const newPlacement: Placement = {
               ...placement,

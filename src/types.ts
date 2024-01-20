@@ -18,7 +18,7 @@ export type ImageEditorElement = EditorElementBase<
   { src: string; elementId: string; imageObject?: fabric.Object, effect: Effect }
 >;
 export type ShapeEditorElement = EditorElementBase<
-  "rect" | 'circle' | 'triangle' | 'line',
+  "rect" | 'circle' | 'triangle' | 'line' | 'polygon',
   { 
     fill: string;
     width: number;
