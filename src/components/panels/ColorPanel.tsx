@@ -33,11 +33,11 @@ export const ColorPanel = observer(() => {
   return (
     <>
       <div className="text-sm px-[16px] pt-[16px] pb-[8px] font-semibold">
-        Fill
+        Select Color
       </div>
       <div className="flex items-center justify-center">
         <SketchPicker
-          color={store?.backgroundColor}
+          color="#fff"
           onChangeComplete={(color: any) => {
             // console.log(color);
             store?.changeElementFill(color.hex);
