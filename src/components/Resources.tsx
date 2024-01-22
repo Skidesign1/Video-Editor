@@ -11,6 +11,7 @@ import { TextResourcesPanel } from "./panels/TextResourcesPanel";
 import { VideoResourcesPanel } from "./panels/VideoResourcesPanel";
 import { EffectsPanel } from "./panels/EffectsPanel";
 import { ShapePanel } from "./panels/ShapePanel";
+import { ColorPanel } from "./panels/ColorPanel";
 
 export const Resources = observer(() => {
   const store = React.useContext(StoreContext);
@@ -26,6 +27,7 @@ export const Resources = observer(() => {
       {selectedMenuOption === "Export" ? <ExportVideoPanel /> : null}
       {selectedMenuOption === "Fill" ? <FillPanel /> : null}
       {selectedMenuOption === "Shapes" ? <ShapePanel /> : null}
+      {selectedMenuOption === "Color" ? <ColorPanel /> : null}
     </>
   );
 });

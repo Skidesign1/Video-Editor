@@ -84,6 +84,13 @@ const MENU_OPTIONS = [
     },
   },
   {
+    name: "Color",
+    icon: MdOutlineFormatColorFill,
+    action: (store: Store) => {
+      store?.setSelectedMenuOption("Color");
+    },
+  },
+  {
     name: "Animation",
     icon: MdTransform,
     action: (store: Store) => {

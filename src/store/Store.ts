@@ -294,6 +294,15 @@ export class Store {
   }
   updateSelectedElement() {
     this.selectedElement = this.editorElements.find((element) => element.id === this.selectedElement?.id) ?? null;
+
+  }
+  changeElementFill(color: string) {
+    if (this.selectedElement instanceof fabric.Object) {
+      const selectedObject = this.selectedElement as fabric.Object; // Explicit cast
+      console.log('Selected Element Type:', typeof this.selectedElement);
+      selectedObject.set('fill', color);
+      this.refreshElements();
+    }
   }
 
   setEditorElements(editorElements: EditorElement[]) {

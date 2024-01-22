@@ -13,7 +13,7 @@ export const Element = observer((props: ElementProps) => {
   const store = React.useContext(StoreContext);
   const { element } = props;
   let Icon: React.ReactNode;
-  if (element.type === "rect" || element.type === "triangle" || element.type === "circle") {
+  if (element.type === "rect" || element.type === "triangle" || element.type === "circle" || element.type === "line" || element.type === "polygon") {
     Icon = <img style={{backgroundColor: 'white', width:'20px', height:'20px'}} src='/shape-icon.svg' />;
   } else if (element.type === "video") {
     Icon = <MdMovie size="20" color="gray" />;

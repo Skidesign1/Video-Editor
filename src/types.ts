@@ -120,4 +120,5 @@ export type MenuOption =
   | "Animation"
   | "Effect"
   | "Fill"
-  | "Shapes";
+  | "Shapes"
+  | "Color";
