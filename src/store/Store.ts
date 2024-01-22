@@ -285,7 +285,6 @@ export class Store {
 
   setSelectedElement(selectedElement: EditorElement | null) {
     this.selectedElement = selectedElement;
-    console.log(this.selectedElement)
     if (this.canvas) {
       if (selectedElement?.fabricObject)
         this.canvas.setActiveObject(selectedElement.fabricObject);
@@ -298,11 +297,8 @@ export class Store {
 
   }
   changeElementFill(color: string) {
-    console.log("color")
-    console.log('Selected Element Type:', typeof this.selectedElement);
     if (this.selectedElement && typeof this.selectedElement === 'object' && 'fabricObject' in this.selectedElement) {
       const fabricObject = this.selectedElement.fabricObject
-      console.log('Selected Element Type:', typeof this.selectedElement);
       if (fabricObject instanceof fabric.Object) {
         fabricObject.set('fill', color);
       }  
