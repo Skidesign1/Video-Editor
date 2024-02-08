@@ -11,12 +11,17 @@ import { TimeLine } from "./TimeLine";
 
 export const Editor = observer(() => {
   const store = React.useContext(StoreContext);
+  const [isMobileSize, setIsMobileSize] = React.useState(false);
+
+  const handleSizeChange = () => {
+    setIsMobileSize(!isMobileSize);
+  };
 
   useEffect(() => {
     if (store && typeof window !== 'undefined') {
       const canvas = new fabric.Canvas("canvas", {
-        height: 500,
-        width: 800,
+        height: isMobileSize ? 500 : 500,
+        width: isMobileSize ? 400 : 800,
         backgroundColor: "#ededed",
       });
       fabric.Object.prototype.transparentCorners = false;
@@ -37,7 +42,7 @@ export const Editor = observer(() => {
         fabric.util.requestAnimFrame(render);
       });
     }
-  }, [store]);
+  }, [store, isMobileSize]);
 
   return (
     <div className="grid grid-rows-[20px_500px_1fr] grid-cols-[60px_200px_800px_1fr] h-[100%] pt-10">
@@ -47,8 +52,9 @@ export const Editor = observer(() => {
       <div className="row-span-2 flex flex-col overflow-auto">
         <Resources />
       </div>
-      <canvas id="canvas" className="h-[500px] w-[800px] row col-start-3" />
+      <canvas id="canvas" className="h-[500px] w-[800px] row col-start-3 flex justify-center items-center" />
       <div className="col-start-4 row-start-2">
+      <button onClick={handleSizeChange}>Toggle Size</button>
         <ElementsPanel />
       </div>
       <div className="col-start-3 row-start-3 col-span-2 relative overflow-scroll px-[10px] py-[4px]">
