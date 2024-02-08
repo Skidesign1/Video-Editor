@@ -10,11 +10,11 @@ export const TextResourcesPanel = observer(() => {
         Add Text
       </div>
       <TextResource sampleText="Headline" fontSize={28} fontWeight={600} />
-      <TextResource sampleText="Body Text" fontSize={16} fontWeight={600} />
-      <TextResource sampleText="Call to Action" fontSize={14} fontWeight={400} />
-      <TextResource sampleText="Phone Number" fontSize={12} fontWeight={400} />
-      <TextResource sampleText="Email" fontSize={24} fontWeight={800} />
-      <TextResource sampleText="Website" fontSize={20} fontWeight={800} />
+      <TextResource sampleText="Body Text" fontSize={16} fontWeight={400} />
+      <TextResource sampleText="Call to Action" fontSize={16} fontWeight={400} />
+      <TextResource sampleText="Phone Number" fontSize={16} fontWeight={400} />
+      <TextResource sampleText="Email" fontSize={16} fontWeight={400} />
+      <TextResource sampleText="Website" fontSize={16} fontWeight={400} />
       {/* <TextResource sampleText="Heading 3" fontSize={18} fontWeight={800} />
       <TextResource sampleText="Heading 4" fontSize={16} fontWeight={800} />
       <TextResource sampleText="Heading 5" fontSize={14} fontWeight={800} />
