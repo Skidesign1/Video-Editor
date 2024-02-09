@@ -20,8 +20,8 @@ export const Editor = observer(() => {
   useEffect(() => {
     if (store && typeof window !== 'undefined') {
       const canvas = new fabric.Canvas("canvas", {
-        height: isMobileSize ? 500 : 500,
-        width: isMobileSize ? 400 : 800,
+        height: isMobileSize ? 720 : 500,
+        width: isMobileSize ? 406 : 800,
         backgroundColor: "#ededed",
       });
       fabric.Object.prototype.transparentCorners = false;
@@ -57,7 +57,7 @@ export const Editor = observer(() => {
       <button onClick={handleSizeChange}>Toggle Size</button>
         <ElementsPanel />
       </div>
-      <div className="col-start-3 row-start-3 col-span-2 relative overflow-scroll px-[10px] py-[4px]">
+      <div className="col-start-3 row-start-3 col-span-2 relative overflow-scroll px-[10px] py-[4px] mt-64">
         <TimeLine />
       </div>
     </div>
