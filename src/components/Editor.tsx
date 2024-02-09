@@ -52,8 +52,8 @@ export const Editor = observer(() => {
       <div className="row-span-2 flex flex-col overflow-auto">
         <Resources />
       </div>
-      <canvas id="canvas" className="h-[500px] w-[800px] row col-start-3 flex justify-center items-center" />
-      <div className="col-start-4 row-start-2">
+      <canvas id="canvas" className="ml-16 h-[500px] w-[800px] row col-start-3" />
+      <div className="ml-20 col-start-4 row-start-2">
       <button onClick={handleSizeChange}>Toggle Size</button>
         <ElementsPanel />
       </div>
