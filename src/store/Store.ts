@@ -785,6 +785,86 @@ export class Store {
 
   }
 
+  publishVideo() {
+    const canvas = document.getElementById("canvas") as HTMLCanvasElement;
+    const stream = canvas.captureStream(30);
+    const audioElements = this.editorElements.filter(isEditorAudioElement);
+    const audioStreams: MediaStream[] = [];
+  
+    // Extract audio streams from audio elements
+    audioElements.forEach((audio) => {
+      const audioElement = document.getElementById(audio.properties.elementId) as HTMLAudioElement;
+      const audioCtx = new AudioContext();
+      const sourceNode = audioCtx.createMediaElementSource(audioElement);
+      const dest = audioCtx.createMediaStreamDestination();
+      sourceNode.connect(dest);
+      sourceNode.connect(audioCtx.destination);
+      audioStreams.push(dest.stream);
+    });
+  
+    // Add audio tracks to the canvas stream
+    audioStreams.forEach((audioStream) => {
+      stream.addTrack(audioStream.getAudioTracks()[0]);
+    });
+  
+    // Create a video element to record the stream
+    const video = document.createElement("video");
+    video.srcObject = stream;
+    video.height = 500;
+    video.width = 800;
+  
+    video.play().then(() => {
+      // Start recording the stream
+      const mediaRecorder = new MediaRecorder(stream);
+      const chunks: Blob[] = [];
+  
+      mediaRecorder.ondataavailable = function (e) {
+        chunks.push(e.data);
+        console.log("data available");
+      };
+  
+      mediaRecorder.onstop = function (e) {
+        // Convert recorded chunks into a Blob
+        const blob = new Blob(chunks, { type: "video/mp4" });
+  
+        // Create FormData to send video file to backend
+        const formData = new FormData();
+        formData.append("video", blob, "video.mp4");
+  
+        // Send video file to backend URL
+        fetch("BACKEND_URL", {
+          method: "POST",
+          body: formData,
+        })
+        .then(response => {
+          if (response.ok) {
+            console.log("Video sent successfully to backend");
+            // Handle successful response
+          } else {
+            console.error("Failed to send video to backend");
+            // Handle error response
+          }
+        })
+        .catch(error => {
+          console.error("Error sending video to backend:", error);
+          // Handle error
+        });
+      };
+  
+      // Start recording
+      mediaRecorder.start();
+  
+      // Stop recording after maxTime milliseconds
+      setTimeout(() => {
+        mediaRecorder.stop();
+      }, this.maxTime);
+  
+      // Remove video element after recording
+      video.remove();
+    });
+  }
+  
+
   refreshElements() {
     const store = this;
     if (!store?.canvas) return;
