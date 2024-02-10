@@ -12,9 +12,11 @@ import { TimeLine } from "./TimeLine";
 export const Editor = observer(() => {
   const store = React.useContext(StoreContext);
   const [isMobileSize, setIsMobileSize] = React.useState(false);
+  const [canvasMargin, setCanvasMargin] = React.useState("ml-16");
 
   const handleSizeChange = () => {
     setIsMobileSize(!isMobileSize);
+    setCanvasMargin(isMobileSize ? "ml-16" : "ml-96");
   };
 
   useEffect(() => {
@@ -52,8 +54,8 @@ export const Editor = observer(() => {
       <div className="row-span-2 flex flex-col overflow-auto">
         <Resources />
       </div>
-      <canvas id="canvas" className="ml-16 h-[500px] w-[800px] row col-start-3" />
-      <div className="ml-20 col-start-4 row-start-2">
+      <canvas id="canvas" className={`${canvasMargin} h-[500px] w-[800px] row col-start-3`} />
+      <div className="ml-24 col-start-4 row-start-2">
       <button onClick={handleSizeChange}>Toggle Size</button>
         <ElementsPanel />
       </div>
