@@ -827,28 +827,40 @@ export class Store {
         // Convert recorded chunks into a Blob
         const blob = new Blob(chunks, { type: "video/mp4" });
   
-        // Create FormData to send video file to backend
-        const formData = new FormData();
-        formData.append("video", blob, "video.mp4");
+        // Convert Blob to Base64 string
+        const reader = new FileReader();
+        reader.readAsDataURL(blob);
+        reader.onloadend = function () {
+          const base64data = reader.result as string;
   
-        // Send video file to backend URL
-        fetch("BACKEND_URL", {
-          method: "POST",
-          body: formData,
-        })
-        .then(response => {
-          if (response.ok) {
-            console.log("Video sent successfully to backend");
-            // Handle successful response
-          } else {
-            console.error("Failed to send video to backend");
-            // Handle error response
-          }
-        })
-        .catch(error => {
-          console.error("Error sending video to backend:", error);
-          // Handle error
-        });
+          // Prepare JSON data with video as Base64
+          const jsonData = {
+            templateFile: base64data,
+            isPublished: true,
+          };
+  
+          // Send JSON data to backend URL
+          fetch("https://skyestudio-backend.onrender.com/creatives/designs/:templateId/update", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(jsonData),
+          })
+          .then(response => {
+            if (response.ok) {
+              console.log("Video sent successfully to backend");
+              // Handle successful response
+            } else {
+              console.error("Failed to send video to backend");
+              // Handle error response
+            }
+          })
+          .catch(error => {
+            console.error("Error sending video to backend:", error);
+            // Handle error
+          });
+        };
       };
   
       // Start recording
