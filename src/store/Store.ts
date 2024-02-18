@@ -838,12 +838,14 @@ export class Store {
             templateFile: base64data,
             isPublished: true,
           };
-  
+          const templateId = window.sessionStorage.getItem("templateId")
+          const token = window.sessionStorage.getItem("token")
           // Send JSON data to backend URL
-          fetch("https://skyestudio-backend.onrender.com/creatives/designs/:templateId/update", {
+          fetch(`https://skyestudio-backend.onrender.com/creatives/designs/${templateId}/update`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
+              "Authorization": `${token}`,
             },
             body: JSON.stringify(jsonData),
           })

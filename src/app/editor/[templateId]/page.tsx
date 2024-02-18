@@ -12,8 +12,15 @@ function EditorPage( ) {
     const params = useParams<{ templateId: string }>()
     const searchParams = useSearchParams()
     const userId = searchParams.get('userId')
+    const token = searchParams.get('token')
+    if (token) {
+      window.sessionStorage.setItem('token', token);
+    }
    if (userId) {
     window.sessionStorage.setItem('userId', userId);
+  }
+  if (params.templateId) {
+    window.sessionStorage.setItem('templateId', params.templateId);
   }
     const [templateInfo, setTemplateInfo] = useState(null);
     const [userInfo, setUserInfo] = useState(null);
