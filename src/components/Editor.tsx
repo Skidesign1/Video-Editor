@@ -15,15 +15,20 @@ export const Editor = observer(() => {
   const [canvasMargin, setCanvasMargin] = React.useState("ml-16");
 
   const handleSizeChange = () => {
-    setIsMobileSize(!isMobileSize);
-    setCanvasMargin(isMobileSize ? "ml-16" : "ml-96");
+    setIsMobileSize(!isMobileSize)
+    if (isMobileSize) {
+    store?.toggleCanvas(406, 720)
+    } else {
+      store?.toggleCanvas(800, 500)
+    }
+    setCanvasMargin(isMobileSize ? "ml-96" : "ml-16");
   };
 
   useEffect(() => {
     if (store && typeof window !== 'undefined') {
       const canvas = new fabric.Canvas("canvas", {
-        height: isMobileSize ? 720 : 500,
-        width: isMobileSize ? 406 : 800,
+        height:  500,
+        width: 800,
         backgroundColor: "#ededed",
       });
       fabric.Object.prototype.transparentCorners = false;
@@ -44,7 +49,7 @@ export const Editor = observer(() => {
         fabric.util.requestAnimFrame(render);
       });
     }
-  }, [store, isMobileSize]);
+  }, [store]);
 
   return (
     <div className="grid grid-rows-[20px_500px_1fr] grid-cols-[60px_200px_800px_1fr] h-[100%] pt-10">
@@ -55,11 +60,15 @@ export const Editor = observer(() => {
         <Resources />
       </div>
       <canvas id="canvas" className={`${canvasMargin} h-[500px] w-[800px] row col-start-3`} />
-      <div className="ml-24 col-start-4 row-start-2">
-      <button onClick={handleSizeChange}>Toggle Size</button>
-      <button onClick={() => store?.publishVideo()}>Publish Video</button>
-      <button onClick={() => store?.saveVideo()}>Publish Video</button>
+      <div className="ml-24 col-start-4 row-2">
+        <div className="grid gap-1 grid-cols-1 mb-4">
+        <button onClick={handleSizeChange}>Toggle Size</button>
+        <button onClick={() => store?.publishVideo()}>Publish Video</button>
+        <button onClick={() => store?.saveVideo()}>Save Video</button>
+        
+        </div>
         <ElementsPanel />
+        
       </div>
       <div className="col-start-3 row-start-3 col-span-2 relative overflow-scroll px-[10px] py-[4px] mt-64">
         <TimeLine />

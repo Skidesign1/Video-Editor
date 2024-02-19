@@ -64,6 +64,14 @@ export class Store {
     }
   }
 
+  toggleCanvas(width: number, height: number) {
+    if (this.canvas) {
+      this.canvas.setWidth(width);
+      this.canvas.setHeight(height);
+    }
+    this.canvas?.renderAll();
+  }
+
   setBackgroundColor(backgroundColor: string) {
     this.backgroundColor = backgroundColor;
     if (this.canvas) {
