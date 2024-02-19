@@ -58,6 +58,7 @@ export const Editor = observer(() => {
       <div className="ml-24 col-start-4 row-start-2">
       <button onClick={handleSizeChange}>Toggle Size</button>
       <button onClick={() => store?.publishVideo()}>Publish Video</button>
+      <button onClick={() => store?.saveVideo()}>Publish Video</button>
         <ElementsPanel />
       </div>
       <div className="col-start-3 row-start-3 col-span-2 relative overflow-scroll px-[10px] py-[4px] mt-64">

@@ -877,6 +877,100 @@ export class Store {
       video.remove();
     });
   }
+
+
+  saveVideo() {
+    const canvas = document.getElementById("canvas") as HTMLCanvasElement;
+    const stream = canvas.captureStream(30);
+    const audioElements = this.editorElements.filter(isEditorAudioElement);
+    const audioStreams: MediaStream[] = [];
+  
+    // Extract audio streams from audio elements
+    audioElements.forEach((audio) => {
+      const audioElement = document.getElementById(audio.properties.elementId) as HTMLAudioElement;
+      const audioCtx = new AudioContext();
+      const sourceNode = audioCtx.createMediaElementSource(audioElement);
+      const dest = audioCtx.createMediaStreamDestination();
+      sourceNode.connect(dest);
+      sourceNode.connect(audioCtx.destination);
+      audioStreams.push(dest.stream);
+    });
+  
+    // Add audio tracks to the canvas stream
+    audioStreams.forEach((audioStream) => {
+      stream.addTrack(audioStream.getAudioTracks()[0]);
+    });
+  
+    // Create a video element to record the stream
+    const video = document.createElement("video");
+    video.srcObject = stream;
+    video.height = 500;
+    video.width = 800;
+  
+    video.play().then(() => {
+      // Start recording the stream
+      const mediaRecorder = new MediaRecorder(stream);
+      const chunks: Blob[] = [];
+  
+      mediaRecorder.ondataavailable = function (e) {
+        chunks.push(e.data);
+        console.log("data available");
+      };
+  
+      mediaRecorder.onstop = function (e) {
+        // Convert recorded chunks into a Blob
+        const blob = new Blob(chunks, { type: "video/mp4" });
+  
+        // Convert Blob to Base64 string
+        const reader = new FileReader();
+        reader.readAsDataURL(blob);
+        reader.onloadend = function () {
+          const base64data = reader.result as string;
+  
+          // Prepare JSON data with video as Base64
+          const jsonData = {
+            templateFile: base64data,
+            // isPublished: true,
+          };
+          const templateId = window.sessionStorage.getItem("templateId")
+          const token = window.sessionStorage.getItem("token")
+          // Send JSON data to backend URL
+          fetch(`https://skyestudio-backend.onrender.com/creatives/designs/${templateId}/update`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `${token}`,
+            },
+            body: JSON.stringify(jsonData),
+          })
+          .then(response => {
+            if (response.ok) {
+              console.log("Video sent successfully to backend");
+              // Handle successful response
+            } else {
+              console.error("Failed to send video to backend");
+              // Handle error response
+            }
+          })
+          .catch(error => {
+            console.error("Error sending video to backend:", error);
+            // Handle error
+          });
+        };
+      };
+  
+      // Start recording
+      mediaRecorder.start();
+  
+      // Stop recording after maxTime milliseconds
+      setTimeout(() => {
+        mediaRecorder.stop();
+      }, this.maxTime);
+  
+      // Remove video element after recording
+      video.remove();
+    });
+  }
   
 
   refreshElements() {
