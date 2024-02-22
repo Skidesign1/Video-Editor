@@ -564,7 +564,7 @@ export class Store {
   }
 
   addShape(options: {
-    type: 'rect' | 'circle' | 'triangle' | 'line' | 'polygon',  // You can extend this for other shapes
+    type: 'rect' | 'circle' | 'triangle' | 'line' | 'octagon' | 'pentagon' | 'hexagon' | 'rhombus' | 'trapezoid' | 'parallelogram' | 'ellipse' | 'oval' | 'star' | 'heart',
     width: number,
     height: number,
     fill: string,
@@ -622,21 +622,18 @@ export class Store {
           strokeWidth: options.strokeWidth,
         });
         break;
-      case 'polygon':
+      case 'octagon':
         shape = new fabric.Polygon(
-          [{
-            x: 150,
-            y: 50
-          }, {
-            x: 225,
-            y: 150
-          }, {
-            x: 150,
-            y: 250
-          }, {
-            x: 75,
-            y: 150
-          }],
+          [
+            { x: 0, y: -50 },
+            { x: 35.4, y: -35.4 },
+            { x: 50, y: 0 },
+            { x: 35.4, y: 35.4 },
+            { x: 0, y: 50 },
+            { x: -35.4, y: 35.4 },
+            { x: -50, y: 0 },
+            { x: -35.4, y: -35.4 }
+          ],
           {
             left: 0,
             top: 0,
@@ -647,6 +644,151 @@ export class Store {
             strokeWidth: options.strokeWidth,
           });
         break;
+        case 'pentagon':
+          shape = new fabric.Polygon(
+            [
+              { x: 0, y: -50 },
+              { x: 50, y: -20 },
+              { x: 30, y: 40 },
+              { x: -30, y: 40 },
+              { x: -50, y: -20 }
+            ],
+            {
+              left: 0,
+              top: 0,
+              width: options.width,
+              height: options.height,
+              fill: options.fill,
+              stroke: options.stroke,
+              strokeWidth: options.strokeWidth,
+            });
+          break;
+          case 'hexagon':
+            shape = new fabric.Polygon(
+              [
+                { x: 0, y: -50 },
+                { x: 43.3, y: -25 },
+                { x: 43.3, y: 25 },
+                { x: 0, y: 50 },
+                { x: -43.3, y: 25 },
+                { x: -43.3, y: -25 }
+              ],
+              {
+                left: 0,
+                top: 0,
+                width: options.width,
+                height: options.height,
+                fill: options.fill,
+                stroke: options.stroke,
+                strokeWidth: options.strokeWidth,
+              });
+            break;
+            case 'rhombus':
+              shape = new fabric.Polygon(
+                [
+                  { x: 0, y: -50 },
+                  { x: 50, y: 0 },
+                  { x: 0, y: 50 },
+                  { x: -50, y: 0 }
+                ],
+                {
+                  left: 0,
+                  top: 0,
+                  width: options.width,
+                  height: options.height,
+                  fill: options.fill,
+                  stroke: options.stroke,
+                  strokeWidth: options.strokeWidth,
+                });
+              break;
+              case 'trapezoid':
+                shape = new fabric.Polygon(
+                  [
+                    { x: -40, y: -50 },
+                    { x: 40, y: -50 },
+                    { x: 30, y: 50 },
+                    { x: -30, y: 50 }
+                  ],
+                  {
+                    left: 0,
+                    top: 0,
+                    width: options.width,
+                    height: options.height,
+                    fill: options.fill,
+                    stroke: options.stroke,
+                    strokeWidth: options.strokeWidth,
+                  });
+                break;
+                case 'parallelogram':
+                  shape = new fabric.Polygon(
+                    [
+                      { x: 0, y: -50 },
+                      { x: 80, y: -50 },
+                      { x: 50, y: 50 },
+                      { x: -30, y: 50 }
+                    ],
+                    {
+                      left: 0,
+                      top: 0,
+                      width: options.width,
+                      height: options.height,
+                      fill: options.fill,
+                      stroke: options.stroke,
+                      strokeWidth: options.strokeWidth,
+                    });
+                  break;
+                case 'ellipse':
+                  shape = new fabric.Ellipse(
+                    {
+                      rx: 50,
+                      ry: 25,
+                      left: 0,
+                      top: 0,
+                      width: options.width,
+                      height: options.height,
+                      fill: options.fill,
+                      stroke: options.stroke,
+                      strokeWidth: options.strokeWidth,
+                    });
+                    break;
+                  case 'oval':
+                    shape = new fabric.Ellipse(
+                      {
+                        rx: 75,
+                        ry: 40,
+                        left: 0,
+                        top: 0,
+                        width: options.width,
+                        height: options.height,
+                        fill: options.fill,
+                        stroke: options.stroke,
+                        strokeWidth: options.strokeWidth,
+                      });
+                    break;
+                  case 'star':
+                    shape = new fabric.Path('M 100 0 L 125 50 L 200 50 L 150 90 L 175 150 L 100 120 L 25 150 L 50 90 L 0 50 L 75 50 Z',
+                      {
+                        left: 0,
+                        top: 0,
+                        width: options.width,
+                        height: options.height,
+                        fill: options.fill,
+                        stroke: options.stroke,
+                        strokeWidth: options.strokeWidth,
+                      });
+                    break;
+                  case 'heart':
+                    shape = new fabric.Path('M 100 0 A 20 20 0 0 1 100 40 A 20 20 0 0 1 100 80 Q 100 100 80 120 A 20 20 0 0 1 60 120 A 20 20 0 0 1 20 80 Q 0 60 0 40 A 20 20 0 0 1 20 0 Q 50 -20 100 0 Z',
+                      {
+                        left: 0,
+                        top: 0,
+                        width: options.width,
+                        height: options.height,
+                        fill: options.fill,
+                        stroke: options.stroke,
+                        strokeWidth: options.strokeWidth,
+                      });
+                      break;
 
       default:
         throw new Error(`Unsupported shape type: ${options.type}`);
@@ -1331,21 +1473,18 @@ export class Store {
           });
           break;
         }
-        case "polygon": {
-          const polyObject = new fabric.Polygon(
-            [{
-              x: 150,
-              y: 50
-           }, {
-              x: 225,
-              y: 150
-           }, {
-              x: 150,
-              y: 250
-           }, {
-              x: 75,
-              y: 150
-           }],
+        case "octagon": {
+          const octObject = new fabric.Polygon(
+            [
+              { x: 0, y: -50 },
+              { x: 35.4, y: -35.4 },
+              { x: 50, y: 0 },
+              { x: 35.4, y: 35.4 },
+              { x: 0, y: 50 },
+              { x: -35.4, y: 35.4 },
+              { x: -50, y: 0 },
+              { x: -35.4, y: -35.4 }
+            ],
              {
             name: element.id,
             left: element.placement.x,
@@ -1362,12 +1501,12 @@ export class Store {
             selectable: true,
             lockUniScaling: true,
           });
-          element.fabricObject = polyObject;
-          canvas.add(polyObject);
+          element.fabricObject = octObject;
+          canvas.add(octObject);
           canvas.on("object:modified", function (e) {
             if (!e.target) return;
             const target = e.target;
-            if (target != polyObject) return;
+            if (target != octObject) return;
             const placement = element.placement;
             const newPlacement: Placement = {
               ...placement,
@@ -1387,6 +1526,431 @@ export class Store {
           });
           break;
         }
+        case "pentagon": {
+          const pentObject = new fabric.Polygon(
+            [
+              { x: 0, y: -50 },
+              { x: 50, y: -20 },
+              { x: 30, y: 40 },
+              { x: -30, y: 40 },
+              { x: -50, y: -20 }
+            ],
+             {
+            name: element.id,
+            left: element.placement.x,
+            top: element.placement.y,
+            scaleX: element.placement.scaleX,
+            scaleY: element.placement.scaleY,
+            width: element.properties.width,
+            height: element.properties.height,
+            angle: element.placement.rotation,
+            fill: element.properties.fill,
+            stroke: element.properties.stroke,
+            strokeWidth: element.properties.strokeWidth,
+            objectCaching: false,
+            selectable: true,
+            lockUniScaling: true,
+          });
+          element.fabricObject = pentObject;
+          canvas.add(pentObject);
+          canvas.on("object:modified", function (e) {
+            if (!e.target) return;
+            const target = e.target;
+            if (target != pentObject) return;
+            const placement = element.placement;
+            const newPlacement: Placement = {
+              ...placement,
+              x: target.left ?? placement.x,
+              y: target.top ?? placement.y,
+              rotation: target.angle ?? placement.rotation,
+              width: target.width ?? placement.width,
+              height: target.height ?? placement.height,
+              scaleX: target.scaleX ?? placement.scaleX,
+              scaleY: target.scaleY ?? placement.scaleY,
+            };
+            const newElement = {
+              ...element,
+              placement: newPlacement,
+            };
+            store?.updateEditorElement(newElement);
+          });
+          break;
+        }
+        case "hexagon": {
+          const hexObject = new fabric.Polygon(
+            [
+              { x: 0, y: -50 },
+              { x: 43.3, y: -25 },
+              { x: 43.3, y: 25 },
+              { x: 0, y: 50 },
+              { x: -43.3, y: 25 },
+              { x: -43.3, y: -25 }
+            ],
+             {
+            name: element.id,
+            left: element.placement.x,
+            top: element.placement.y,
+            scaleX: element.placement.scaleX,
+            scaleY: element.placement.scaleY,
+            width: element.properties.width,
+            height: element.properties.height,
+            angle: element.placement.rotation,
+            fill: element.properties.fill,
+            stroke: element.properties.stroke,
+            strokeWidth: element.properties.strokeWidth,
+            objectCaching: false,
+            selectable: true,
+            lockUniScaling: true,
+          });
+          element.fabricObject = hexObject;
+          canvas.add(hexObject);
+          canvas.on("object:modified", function (e) {
+            if (!e.target) return;
+            const target = e.target;
+            if (target != hexObject) return;
+            const placement = element.placement;
+            const newPlacement: Placement = {
+              ...placement,
+              x: target.left ?? placement.x,
+              y: target.top ?? placement.y,
+              rotation: target.angle ?? placement.rotation,
+              width: target.width ?? placement.width,
+              height: target.height ?? placement.height,
+              scaleX: target.scaleX ?? placement.scaleX,
+              scaleY: target.scaleY ?? placement.scaleY,
+            };
+            const newElement = {
+              ...element,
+              placement: newPlacement,
+            };
+            store?.updateEditorElement(newElement);
+          });
+          break;
+        }
+        case "rhombus": {
+          const rhoObject = new fabric.Polygon(
+            [
+              { x: 0, y: -50 },
+              { x: 50, y: 0 },
+              { x: 0, y: 50 },
+              { x: -50, y: 0 }
+            ],
+             {
+            name: element.id,
+            left: element.placement.x,
+            top: element.placement.y,
+            scaleX: element.placement.scaleX,
+            scaleY: element.placement.scaleY,
+            width: element.properties.width,
+            height: element.properties.height,
+            angle: element.placement.rotation,
+            fill: element.properties.fill,
+            stroke: element.properties.stroke,
+            strokeWidth: element.properties.strokeWidth,
+            objectCaching: false,
+            selectable: true,
+            lockUniScaling: true,
+          });
+          element.fabricObject = rhoObject;
+          canvas.add(rhoObject);
+          canvas.on("object:modified", function (e) {
+            if (!e.target) return;
+            const target = e.target;
+            if (target != rhoObject) return;
+            const placement = element.placement;
+            const newPlacement: Placement = {
+              ...placement,
+              x: target.left ?? placement.x,
+              y: target.top ?? placement.y,
+              rotation: target.angle ?? placement.rotation,
+              width: target.width ?? placement.width,
+              height: target.height ?? placement.height,
+              scaleX: target.scaleX ?? placement.scaleX,
+              scaleY: target.scaleY ?? placement.scaleY,
+            };
+            const newElement = {
+              ...element,
+              placement: newPlacement,
+            };
+            store?.updateEditorElement(newElement);
+          });
+          break;
+        }
+        case "trapezoid": {
+          const traObject = new fabric.Polygon(
+            [
+              { x: -40, y: -50 },
+              { x: 40, y: -50 },
+              { x: 30, y: 50 },
+              { x: -30, y: 50 }
+            ],
+             {
+            name: element.id,
+            left: element.placement.x,
+            top: element.placement.y,
+            scaleX: element.placement.scaleX,
+            scaleY: element.placement.scaleY,
+            width: element.properties.width,
+            height: element.properties.height,
+            angle: element.placement.rotation,
+            fill: element.properties.fill,
+            stroke: element.properties.stroke,
+            strokeWidth: element.properties.strokeWidth,
+            objectCaching: false,
+            selectable: true,
+            lockUniScaling: true,
+          });
+          element.fabricObject = traObject;
+          canvas.add(traObject);
+          canvas.on("object:modified", function (e) {
+            if (!e.target) return;
+            const target = e.target;
+            if (target != traObject) return;
+            const placement = element.placement;
+            const newPlacement: Placement = {
+              ...placement,
+              x: target.left ?? placement.x,
+              y: target.top ?? placement.y,
+              rotation: target.angle ?? placement.rotation,
+              width: target.width ?? placement.width,
+              height: target.height ?? placement.height,
+              scaleX: target.scaleX ?? placement.scaleX,
+              scaleY: target.scaleY ?? placement.scaleY,
+            };
+            const newElement = {
+              ...element,
+              placement: newPlacement,
+            };
+            store?.updateEditorElement(newElement);
+          });
+          break;
+        }
+        case "parallelogram": {
+          const paraObject = new fabric.Polygon(
+            [
+              { x: 0, y: -50 },
+              { x: 80, y: -50 },
+              { x: 50, y: 50 },
+              { x: -30, y: 50 }
+            ],
+             {
+            name: element.id,
+            left: element.placement.x,
+            top: element.placement.y,
+            scaleX: element.placement.scaleX,
+            scaleY: element.placement.scaleY,
+            width: element.properties.width,
+            height: element.properties.height,
+            angle: element.placement.rotation,
+            fill: element.properties.fill,
+            stroke: element.properties.stroke,
+            strokeWidth: element.properties.strokeWidth,
+            objectCaching: false,
+            selectable: true,
+            lockUniScaling: true,
+          });
+          element.fabricObject = paraObject;
+          canvas.add(paraObject);
+          canvas.on("object:modified", function (e) {
+            if (!e.target) return;
+            const target = e.target;
+            if (target != paraObject) return;
+            const placement = element.placement;
+            const newPlacement: Placement = {
+              ...placement,
+              x: target.left ?? placement.x,
+              y: target.top ?? placement.y,
+              rotation: target.angle ?? placement.rotation,
+              width: target.width ?? placement.width,
+              height: target.height ?? placement.height,
+              scaleX: target.scaleX ?? placement.scaleX,
+              scaleY: target.scaleY ?? placement.scaleY,
+            };
+            const newElement = {
+              ...element,
+              placement: newPlacement,
+            };
+            store?.updateEditorElement(newElement);
+          });
+          break;
+        }
+        case "ellipse": {
+          const elipObject = new fabric.Ellipse(
+            {
+            name: element.id,
+            rx: 50,
+            ry: 25,
+            left: element.placement.x,
+            top: element.placement.y,
+            scaleX: element.placement.scaleX,
+            scaleY: element.placement.scaleY,
+            width: element.properties.width,
+            height: element.properties.height,
+            angle: element.placement.rotation,
+            fill: element.properties.fill,
+            stroke: element.properties.stroke,
+            strokeWidth: element.properties.strokeWidth,
+            objectCaching: false,
+            selectable: true,
+            lockUniScaling: true,
+          });
+          element.fabricObject = elipObject;
+          canvas.add(elipObject);
+          canvas.on("object:modified", function (e) {
+            if (!e.target) return;
+            const target = e.target;
+            if (target != elipObject) return;
+            const placement = element.placement;
+            const newPlacement: Placement = {
+              ...placement,
+              x: target.left ?? placement.x,
+              y: target.top ?? placement.y,
+              rotation: target.angle ?? placement.rotation,
+              width: target.width ?? placement.width,
+              height: target.height ?? placement.height,
+              scaleX: target.scaleX ?? placement.scaleX,
+              scaleY: target.scaleY ?? placement.scaleY,
+            };
+            const newElement = {
+              ...element,
+              placement: newPlacement,
+            };
+            store?.updateEditorElement(newElement);
+          });
+          break;
+        }
+        case "oval": {
+          const ovaObject = new fabric.Ellipse(
+            {
+            name: element.id,
+            rx: 75,
+            ry: 40,
+            left: element.placement.x,
+            top: element.placement.y,
+            scaleX: element.placement.scaleX,
+            scaleY: element.placement.scaleY,
+            width: element.properties.width,
+            height: element.properties.height,
+            angle: element.placement.rotation,
+            fill: element.properties.fill,
+            stroke: element.properties.stroke,
+            strokeWidth: element.properties.strokeWidth,
+            objectCaching: false,
+            selectable: true,
+            lockUniScaling: true,
+          });
+          element.fabricObject = ovaObject;
+          canvas.add(ovaObject);
+          canvas.on("object:modified", function (e) {
+            if (!e.target) return;
+            const target = e.target;
+            if (target != ovaObject) return;
+            const placement = element.placement;
+            const newPlacement: Placement = {
+              ...placement,
+              x: target.left ?? placement.x,
+              y: target.top ?? placement.y,
+              rotation: target.angle ?? placement.rotation,
+              width: target.width ?? placement.width,
+              height: target.height ?? placement.height,
+              scaleX: target.scaleX ?? placement.scaleX,
+              scaleY: target.scaleY ?? placement.scaleY,
+            };
+            const newElement = {
+              ...element,
+              placement: newPlacement,
+            };
+            store?.updateEditorElement(newElement);
+          });
+          break;
+        }
+        case "star": {
+          const starObject = new fabric.Path('M 100 0 L 125 50 L 200 50 L 150 90 L 175 150 L 100 120 L 25 150 L 50 90 L 0 50 L 75 50 Z',
+            {
+            name: element.id,
+            left: element.placement.x,
+            top: element.placement.y,
+            scaleX: element.placement.scaleX,
+            scaleY: element.placement.scaleY,
+            width: element.properties.width,
+            height: element.properties.height,
+            angle: element.placement.rotation,
+            fill: element.properties.fill,
+            stroke: element.properties.stroke,
+            strokeWidth: element.properties.strokeWidth,
+            objectCaching: false,
+            selectable: true,
+            lockUniScaling: true,
+          });
+          element.fabricObject = starObject;
+          canvas.add(starObject);
+          canvas.on("object:modified", function (e) {
+            if (!e.target) return;
+            const target = e.target;
+            if (target != starObject) return;
+            const placement = element.placement;
+            const newPlacement: Placement = {
+              ...placement,
+              x: target.left ?? placement.x,
+              y: target.top ?? placement.y,
+              rotation: target.angle ?? placement.rotation,
+              width: target.width ?? placement.width,
+              height: target.height ?? placement.height,
+              scaleX: target.scaleX ?? placement.scaleX,
+              scaleY: target.scaleY ?? placement.scaleY,
+            };
+            const newElement = {
+              ...element,
+              placement: newPlacement,
+            };
+            store?.updateEditorElement(newElement);
+          });
+          break;
+        }
+        case "heart": {
+          const heartObject = new fabric.Path('M 100 0 A 20 20 0 0 1 100 40 A 20 20 0 0 1 100 80 Q 100 100 80 120 A 20 20 0 0 1 60 120 A 20 20 0 0 1 20 80 Q 0 60 0 40 A 20 20 0 0 1 20 0 Q 50 -20 100 0 Z',
+            {
+            name: element.id,
+            left: element.placement.x,
+            top: element.placement.y,
+            scaleX: element.placement.scaleX,
+            scaleY: element.placement.scaleY,
+            width: element.properties.width,
+            height: element.properties.height,
+            angle: element.placement.rotation,
+            fill: element.properties.fill,
+            stroke: element.properties.stroke,
+            strokeWidth: element.properties.strokeWidth,
+            objectCaching: false,
+            selectable: true,
+            lockUniScaling: true,
+          });
+          element.fabricObject = heartObject;
+          canvas.add(heartObject);
+          canvas.on("object:modified", function (e) {
+            if (!e.target) return;
+            const target = e.target;
+            if (target != heartObject) return;
+            const placement = element.placement;
+            const newPlacement: Placement = {
+              ...placement,
+              x: target.left ?? placement.x,
+              y: target.top ?? placement.y,
+              rotation: target.angle ?? placement.rotation,
+              width: target.width ?? placement.width,
+              height: target.height ?? placement.height,
+              scaleX: target.scaleX ?? placement.scaleX,
+              scaleY: target.scaleY ?? placement.scaleY,
+            };
+            const newElement = {
+              ...element,
+              placement: newPlacement,
+            };
+            store?.updateEditorElement(newElement);
+          });
+          break;
+        }
+
         default: {
           throw new Error("Not implemented");
         }
