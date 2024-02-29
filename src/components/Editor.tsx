@@ -17,7 +17,7 @@ export const Editor = observer(() => {
   const handleSizeChange = () => {
     setIsMobileSize(!isMobileSize)
     if (isMobileSize) {
-    store?.toggleCanvas(406, 720)
+      store?.toggleCanvas(406, 720)
     } else {
       store?.toggleCanvas(800, 500)
     }
@@ -27,7 +27,7 @@ export const Editor = observer(() => {
   useEffect(() => {
     if (store && typeof window !== 'undefined') {
       const canvas = new fabric.Canvas("canvas", {
-        height:  500,
+        height: 500,
         width: 800,
         backgroundColor: "#ededed",
       });
@@ -62,13 +62,32 @@ export const Editor = observer(() => {
       <canvas id="canvas" className={`${canvasMargin} h-[500px] w-[800px] row col-start-3`} />
       <div className="ml-24 col-start-4 row-2">
         <div className="grid gap-1 grid-cols-1 mb-4">
-        <button onClick={handleSizeChange}>Toggle Size</button>
-        <button onClick={() => store?.publishVideo()}>Publish Video</button>
-        <button onClick={() => store?.saveVideo()}>Save Video</button>
-        
+          <p style={{
+            borderRadius: '5px',
+            backgroundColor: 'white',
+            boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+            color: 'black',
+            padding: '10px 20px',
+            cursor: 'pointer',
+            transition: 'background-color 0.3s, border-color 0.3s',
+            width: 'fit-content',
+            marginBottom: '10px',
+          }}
+            onClick={handleSizeChange}>Toggle Size</p>
+          <button style={{
+            borderRadius: '5px',
+            backgroundColor: 'white',
+            boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+            color: 'black',
+            padding: '10px 20px',
+            cursor: 'pointer',
+            transition: 'background-color 0.3s, border-color 0.3s',
+            width: 'fit-content',
+            marginBottom: '10px',
+          }} onClick={() => store?.publishVideo()}>Publish Video</button>
         </div>
         <ElementsPanel />
-        
+
       </div>
       <div className="col-start-3 row-start-3 col-span-2 relative overflow-scroll px-[10px] py-[4px] mt-64">
         <TimeLine />

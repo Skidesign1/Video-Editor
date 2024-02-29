@@ -309,7 +309,7 @@ export class Store {
       const fabricObject = this.selectedElement.fabricObject
       if (fabricObject instanceof fabric.Object) {
         fabricObject.set('fill', color);
-      }  
+      }
       // this.refreshElements();
     }
   }
@@ -644,151 +644,151 @@ export class Store {
             strokeWidth: options.strokeWidth,
           });
         break;
-        case 'pentagon':
-          shape = new fabric.Polygon(
-            [
-              { x: 0, y: -50 },
-              { x: 50, y: -20 },
-              { x: 30, y: 40 },
-              { x: -30, y: 40 },
-              { x: -50, y: -20 }
-            ],
-            {
-              left: 0,
-              top: 0,
-              width: options.width,
-              height: options.height,
-              fill: options.fill,
-              stroke: options.stroke,
-              strokeWidth: options.strokeWidth,
-            });
-          break;
-          case 'hexagon':
-            shape = new fabric.Polygon(
-              [
-                { x: 0, y: -50 },
-                { x: 43.3, y: -25 },
-                { x: 43.3, y: 25 },
-                { x: 0, y: 50 },
-                { x: -43.3, y: 25 },
-                { x: -43.3, y: -25 }
-              ],
-              {
-                left: 0,
-                top: 0,
-                width: options.width,
-                height: options.height,
-                fill: options.fill,
-                stroke: options.stroke,
-                strokeWidth: options.strokeWidth,
-              });
-            break;
-            case 'rhombus':
-              shape = new fabric.Polygon(
-                [
-                  { x: 0, y: -50 },
-                  { x: 50, y: 0 },
-                  { x: 0, y: 50 },
-                  { x: -50, y: 0 }
-                ],
-                {
-                  left: 0,
-                  top: 0,
-                  width: options.width,
-                  height: options.height,
-                  fill: options.fill,
-                  stroke: options.stroke,
-                  strokeWidth: options.strokeWidth,
-                });
-              break;
-              case 'trapezoid':
-                shape = new fabric.Polygon(
-                  [
-                    { x: -40, y: -50 },
-                    { x: 40, y: -50 },
-                    { x: 30, y: 50 },
-                    { x: -30, y: 50 }
-                  ],
-                  {
-                    left: 0,
-                    top: 0,
-                    width: options.width,
-                    height: options.height,
-                    fill: options.fill,
-                    stroke: options.stroke,
-                    strokeWidth: options.strokeWidth,
-                  });
-                break;
-                case 'parallelogram':
-                  shape = new fabric.Polygon(
-                    [
-                      { x: 0, y: -50 },
-                      { x: 80, y: -50 },
-                      { x: 50, y: 50 },
-                      { x: -30, y: 50 }
-                    ],
-                    {
-                      left: 0,
-                      top: 0,
-                      width: options.width,
-                      height: options.height,
-                      fill: options.fill,
-                      stroke: options.stroke,
-                      strokeWidth: options.strokeWidth,
-                    });
-                  break;
-                case 'ellipse':
-                  shape = new fabric.Ellipse(
-                    {
-                      rx: 50,
-                      ry: 25,
-                      left: 0,
-                      top: 0,
-                      width: options.width,
-                      height: options.height,
-                      fill: options.fill,
-                      stroke: options.stroke,
-                      strokeWidth: options.strokeWidth,
-                    });
-                    break;
-                  case 'oval':
-                    shape = new fabric.Ellipse(
-                      {
-                        rx: 75,
-                        ry: 40,
-                        left: 0,
-                        top: 0,
-                        width: options.width,
-                        height: options.height,
-                        fill: options.fill,
-                        stroke: options.stroke,
-                        strokeWidth: options.strokeWidth,
-                      });
-                    break;
-                  case 'star':
-                    shape = new fabric.Path('M 100 0 L 125 50 L 200 50 L 150 90 L 175 150 L 100 120 L 25 150 L 50 90 L 0 50 L 75 50 Z',
-                      {
-                        left: 0,
-                        top: 0,
-                        width: options.width,
-                        height: options.height,
-                        fill: options.fill,
-                        stroke: options.stroke,
-                        strokeWidth: options.strokeWidth,
-                      });
-                    break;
-                  case 'heart':
-                    shape = new fabric.Path('M 100 0 A 20 20 0 0 1 100 40 A 20 20 0 0 1 100 80 Q 100 100 80 120 A 20 20 0 0 1 60 120 A 20 20 0 0 1 20 80 Q 0 60 0 40 A 20 20 0 0 1 20 0 Q 50 -20 100 0 Z',
-                      {
-                        left: 0,
-                        top: 0,
-                        width: options.width,
-                        height: options.height,
-                        fill: options.fill,
-                        stroke: options.stroke,
-                        strokeWidth: options.strokeWidth,
-                      });
-                      break;
+      case 'pentagon':
+        shape = new fabric.Polygon(
+          [
+            { x: 0, y: -50 },
+            { x: 50, y: -20 },
+            { x: 30, y: 40 },
+            { x: -30, y: 40 },
+            { x: -50, y: -20 }
+          ],
+          {
+            left: 0,
+            top: 0,
+            width: options.width,
+            height: options.height,
+            fill: options.fill,
+            stroke: options.stroke,
+            strokeWidth: options.strokeWidth,
+          });
+        break;
+      case 'hexagon':
+        shape = new fabric.Polygon(
+          [
+            { x: 0, y: -50 },
+            { x: 43.3, y: -25 },
+            { x: 43.3, y: 25 },
+            { x: 0, y: 50 },
+            { x: -43.3, y: 25 },
+            { x: -43.3, y: -25 }
+          ],
+          {
+            left: 0,
+            top: 0,
+            width: options.width,
+            height: options.height,
+            fill: options.fill,
+            stroke: options.stroke,
+            strokeWidth: options.strokeWidth,
+          });
+        break;
+      case 'rhombus':
+        shape = new fabric.Polygon(
+          [
+            { x: 0, y: -50 },
+            { x: 50, y: 0 },
+            { x: 0, y: 50 },
+            { x: -50, y: 0 }
+          ],
+          {
+            left: 0,
+            top: 0,
+            width: options.width,
+            height: options.height,
+            fill: options.fill,
+            stroke: options.stroke,
+            strokeWidth: options.strokeWidth,
+          });
+        break;
+      case 'trapezoid':
+        shape = new fabric.Polygon(
+          [
+            { x: -40, y: -50 },
+            { x: 40, y: -50 },
+            { x: 30, y: 50 },
+            { x: -30, y: 50 }
+          ],
+          {
+            left: 0,
+            top: 0,
+            width: options.width,
+            height: options.height,
+            fill: options.fill,
+            stroke: options.stroke,
+            strokeWidth: options.strokeWidth,
+          });
+        break;
+      case 'parallelogram':
+        shape = new fabric.Polygon(
+          [
+            { x: 0, y: -50 },
+            { x: 80, y: -50 },
+            { x: 50, y: 50 },
+            { x: -30, y: 50 }
+          ],
+          {
+            left: 0,
+            top: 0,
+            width: options.width,
+            height: options.height,
+            fill: options.fill,
+            stroke: options.stroke,
+            strokeWidth: options.strokeWidth,
+          });
+        break;
+      case 'ellipse':
+        shape = new fabric.Ellipse(
+          {
+            rx: 50,
+            ry: 25,
+            left: 0,
+            top: 0,
+            width: options.width,
+            height: options.height,
+            fill: options.fill,
+            stroke: options.stroke,
+            strokeWidth: options.strokeWidth,
+          });
+        break;
+      case 'oval':
+        shape = new fabric.Ellipse(
+          {
+            rx: 75,
+            ry: 40,
+            left: 0,
+            top: 0,
+            width: options.width,
+            height: options.height,
+            fill: options.fill,
+            stroke: options.stroke,
+            strokeWidth: options.strokeWidth,
+          });
+        break;
+      case 'star':
+        shape = new fabric.Path('M 100 0 L 125 50 L 200 50 L 150 90 L 175 150 L 100 120 L 25 150 L 50 90 L 0 50 L 75 50 Z',
+          {
+            left: 0,
+            top: 0,
+            width: options.width,
+            height: options.height,
+            fill: options.fill,
+            stroke: options.stroke,
+            strokeWidth: options.strokeWidth,
+          });
+        break;
+      case 'heart':
+        shape = new fabric.Path('M 100 0 A 20 20 0 0 1 100 40 A 20 20 0 0 1 100 80 Q 100 100 80 120 A 20 20 0 0 1 60 120 A 20 20 0 0 1 20 80 Q 0 60 0 40 A 20 20 0 0 1 20 0 Q 50 -20 100 0 Z',
+          {
+            left: 0,
+            top: 0,
+            width: options.width,
+            height: options.height,
+            fill: options.fill,
+            stroke: options.stroke,
+            strokeWidth: options.strokeWidth,
+          });
+        break;
 
       default:
         throw new Error(`Unsupported shape type: ${options.type}`);
@@ -936,192 +936,98 @@ export class Store {
   }
 
   publishVideo() {
-    const canvas = document.getElementById("canvas") as HTMLCanvasElement;
-    const stream = canvas.captureStream(30);
-    const audioElements = this.editorElements.filter(isEditorAudioElement);
-    const audioStreams: MediaStream[] = [];
-  
-    // Extract audio streams from audio elements
-    audioElements.forEach((audio) => {
-      const audioElement = document.getElementById(audio.properties.elementId) as HTMLAudioElement;
-      const audioCtx = new AudioContext();
-      const sourceNode = audioCtx.createMediaElementSource(audioElement);
-      const dest = audioCtx.createMediaStreamDestination();
-      sourceNode.connect(dest);
-      sourceNode.connect(audioCtx.destination);
-      audioStreams.push(dest.stream);
-    });
-  
-    // Add audio tracks to the canvas stream
-    audioStreams.forEach((audioStream) => {
-      stream.addTrack(audioStream.getAudioTracks()[0]);
-    });
-  
-    // Create a video element to record the stream
-    const video = document.createElement("video");
-    video.srcObject = stream;
-    video.height = 500;
-    video.width = 800;
-  
-    video.play().then(() => {
-      // Start recording the stream
-      const mediaRecorder = new MediaRecorder(stream);
-      const chunks: Blob[] = [];
-  
-      mediaRecorder.ondataavailable = function (e) {
-        chunks.push(e.data);
-        console.log("data available");
-      };
-  
-      mediaRecorder.onstop = function (e) {
-        // Convert recorded chunks into a Blob
-        const blob = new Blob(chunks, { type: "video/mp4" });
-  
-        // Convert Blob to Base64 string
-        const reader = new FileReader();
-        reader.readAsDataURL(blob);
-        reader.onloadend = function () {
-          const base64data = reader.result as string;
-  
-          // Prepare JSON data with video as Base64
-          const jsonData = {
-            templateFile: base64data,
-            isPublished: true,
-          };
-          const templateId = window.sessionStorage.getItem("templateId")
-          const token = window.sessionStorage.getItem("token")
-          // Send JSON data to backend URL
-          fetch(`https://skyestudio-backend.onrender.com/creatives/designs/${templateId}/update`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              "Authorization": `${token}`,
-            },
-            body: JSON.stringify(jsonData),
-          })
-          .then(response => {
-            if (response.ok) {
-              console.log("Video sent successfully to backend");
-              // Handle successful response
-            } else {
-              console.error("Failed to send video to backend");
-              // Handle error response
-            }
-          })
-          .catch(error => {
-            console.error("Error sending video to backend:", error);
-            // Handle error
-          });
-        };
-      };
-  
-      // Start recording
-      mediaRecorder.start();
-  
-      // Stop recording after maxTime milliseconds
-      setTimeout(() => {
-        mediaRecorder.stop();
-      }, this.maxTime);
-  
-      // Remove video element after recording
-      video.remove();
-    });
-  }
+    const canvas = this.canvas;
+    if (!canvas) return;
+
+     const jsonData = {
+      templateFile: JSON.stringify(canvas.toJSON([
+        "transparentCorners",
+        "cornerColor",
+        "strokeWidth",
+        "cornerStrokeColor",
+        "borderColor",
+        "cornerStyle",
+        "name",
+        "category",
+        "level",
+        "splitByGrapheme",
+      ])),
+      isPublished: true,
+    };
+    const templateId = window.sessionStorage.getItem("templateId")
+    const token = window.sessionStorage.getItem("token")
+    // Send JSON data to backend URL
+    fetch(`https://skyestudio-backend.onrender.com/creatives/designs/${templateId}/update`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `${token}`,
+      },
+      body: JSON.stringify(jsonData),
+    })
+      .then(response => {
+        if (response.ok) {
+          console.log("Video sent successfully to backend");
+          alert("Video published successfully!");
+          // Handle successful response
+        } else {
+          console.error("Failed to send video to backend");
+          alert("Error publishing video.")
+          // Handle error response
+        }
+      })
+      .catch(error => {
+        console.error("Error sending video to backend:", error);
+        alert("Error publising video.")
+      });
+  };
 
 
-  saveVideo() {
-    const canvas = document.getElementById("canvas") as HTMLCanvasElement;
-    const stream = canvas.captureStream(30);
-    const audioElements = this.editorElements.filter(isEditorAudioElement);
-    const audioStreams: MediaStream[] = [];
-  
-    // Extract audio streams from audio elements
-    audioElements.forEach((audio) => {
-      const audioElement = document.getElementById(audio.properties.elementId) as HTMLAudioElement;
-      const audioCtx = new AudioContext();
-      const sourceNode = audioCtx.createMediaElementSource(audioElement);
-      const dest = audioCtx.createMediaStreamDestination();
-      sourceNode.connect(dest);
-      sourceNode.connect(audioCtx.destination);
-      audioStreams.push(dest.stream);
-    });
-  
-    // Add audio tracks to the canvas stream
-    audioStreams.forEach((audioStream) => {
-      stream.addTrack(audioStream.getAudioTracks()[0]);
-    });
-  
-    // Create a video element to record the stream
-    const video = document.createElement("video");
-    video.srcObject = stream;
-    video.height = 500;
-    video.width = 800;
-  
-    video.play().then(() => {
-      // Start recording the stream
-      const mediaRecorder = new MediaRecorder(stream);
-      const chunks: Blob[] = [];
-  
-      mediaRecorder.ondataavailable = function (e) {
-        chunks.push(e.data);
-        console.log("data available");
-      };
-  
-      mediaRecorder.onstop = function (e) {
-        // Convert recorded chunks into a Blob
-        const blob = new Blob(chunks, { type: "video/mp4" });
-  
-        // Convert Blob to Base64 string
-        const reader = new FileReader();
-        reader.readAsDataURL(blob);
-        reader.onloadend = function () {
-          const base64data = reader.result as string;
-  
-          // Prepare JSON data with video as Base64
-          const jsonData = {
-            templateFile: base64data,
-            // isPublished: true,
-          };
-          const templateId = window.sessionStorage.getItem("templateId")
-          const token = window.sessionStorage.getItem("token")
-          // Send JSON data to backend URL
-          fetch(`https://skyestudio-backend.onrender.com/creatives/designs/${templateId}/update`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              "Authorization": `${token}`,
-            },
-            body: JSON.stringify(jsonData),
-          })
-          .then(response => {
-            if (response.ok) {
-              console.log("Video sent successfully to backend");
-              // Handle successful response
-            } else {
-              console.error("Failed to send video to backend");
-              // Handle error response
-            }
-          })
-          .catch(error => {
-            console.error("Error sending video to backend:", error);
-            // Handle error
-          });
-        };
-      };
-  
-      // Start recording
-      mediaRecorder.start();
-  
-      // Stop recording after maxTime milliseconds
-      setTimeout(() => {
-        mediaRecorder.stop();
-      }, this.maxTime);
-  
-      // Remove video element after recording
-      video.remove();
-    });
-  }
-  
+
+  async saveVideo() {
+
+    const canvas = this.canvas;
+    if (!canvas) return;
+    const jsonData = {
+      templateFile: JSON.stringify(canvas.toJSON([
+        "transparentCorners",
+        "cornerColor",
+        "strokeWidth",
+        "cornerStrokeColor",
+        "borderColor",
+        "cornerStyle",
+        "name",
+        "category",
+        "level",
+        "splitByGrapheme",
+      ])),
+    };
+    const templateId = window.sessionStorage.getItem("templateId")
+    const token = window.sessionStorage.getItem("token")
+    // Send JSON data to backend URL
+    fetch(`https://skyestudio-backend.onrender.com/creatives/designs/${templateId}/update`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `${token}`,
+      },
+      body: JSON.stringify(jsonData),
+    })
+      .then(response => {
+        if (response.ok) {
+          console.log("Video sent successfully to backend");
+          alert("Video saved successfully!");
+        } else {
+          console.error("Failed to send video to backend");
+          alert("Error saving video.")
+        }
+      })
+      .catch(error => {
+        console.error("Error sending video to backend:", error);
+        alert("Error saving video.")
+      });
+  };
+
 
   refreshElements() {
     const store = this;
@@ -1485,22 +1391,22 @@ export class Store {
               { x: -50, y: 0 },
               { x: -35.4, y: -35.4 }
             ],
-             {
-            name: element.id,
-            left: element.placement.x,
-            top: element.placement.y,
-            scaleX: element.placement.scaleX,
-            scaleY: element.placement.scaleY,
-            width: element.properties.width,
-            height: element.properties.height,
-            angle: element.placement.rotation,
-            fill: element.properties.fill,
-            stroke: element.properties.stroke,
-            strokeWidth: element.properties.strokeWidth,
-            objectCaching: false,
-            selectable: true,
-            lockUniScaling: true,
-          });
+            {
+              name: element.id,
+              left: element.placement.x,
+              top: element.placement.y,
+              scaleX: element.placement.scaleX,
+              scaleY: element.placement.scaleY,
+              width: element.properties.width,
+              height: element.properties.height,
+              angle: element.placement.rotation,
+              fill: element.properties.fill,
+              stroke: element.properties.stroke,
+              strokeWidth: element.properties.strokeWidth,
+              objectCaching: false,
+              selectable: true,
+              lockUniScaling: true,
+            });
           element.fabricObject = octObject;
           canvas.add(octObject);
           canvas.on("object:modified", function (e) {
@@ -1535,22 +1441,22 @@ export class Store {
               { x: -30, y: 40 },
               { x: -50, y: -20 }
             ],
-             {
-            name: element.id,
-            left: element.placement.x,
-            top: element.placement.y,
-            scaleX: element.placement.scaleX,
-            scaleY: element.placement.scaleY,
-            width: element.properties.width,
-            height: element.properties.height,
-            angle: element.placement.rotation,
-            fill: element.properties.fill,
-            stroke: element.properties.stroke,
-            strokeWidth: element.properties.strokeWidth,
-            objectCaching: false,
-            selectable: true,
-            lockUniScaling: true,
-          });
+            {
+              name: element.id,
+              left: element.placement.x,
+              top: element.placement.y,
+              scaleX: element.placement.scaleX,
+              scaleY: element.placement.scaleY,
+              width: element.properties.width,
+              height: element.properties.height,
+              angle: element.placement.rotation,
+              fill: element.properties.fill,
+              stroke: element.properties.stroke,
+              strokeWidth: element.properties.strokeWidth,
+              objectCaching: false,
+              selectable: true,
+              lockUniScaling: true,
+            });
           element.fabricObject = pentObject;
           canvas.add(pentObject);
           canvas.on("object:modified", function (e) {
@@ -1586,22 +1492,22 @@ export class Store {
               { x: -43.3, y: 25 },
               { x: -43.3, y: -25 }
             ],
-             {
-            name: element.id,
-            left: element.placement.x,
-            top: element.placement.y,
-            scaleX: element.placement.scaleX,
-            scaleY: element.placement.scaleY,
-            width: element.properties.width,
-            height: element.properties.height,
-            angle: element.placement.rotation,
-            fill: element.properties.fill,
-            stroke: element.properties.stroke,
-            strokeWidth: element.properties.strokeWidth,
-            objectCaching: false,
-            selectable: true,
-            lockUniScaling: true,
-          });
+            {
+              name: element.id,
+              left: element.placement.x,
+              top: element.placement.y,
+              scaleX: element.placement.scaleX,
+              scaleY: element.placement.scaleY,
+              width: element.properties.width,
+              height: element.properties.height,
+              angle: element.placement.rotation,
+              fill: element.properties.fill,
+              stroke: element.properties.stroke,
+              strokeWidth: element.properties.strokeWidth,
+              objectCaching: false,
+              selectable: true,
+              lockUniScaling: true,
+            });
           element.fabricObject = hexObject;
           canvas.add(hexObject);
           canvas.on("object:modified", function (e) {
@@ -1635,22 +1541,22 @@ export class Store {
               { x: 0, y: 50 },
               { x: -50, y: 0 }
             ],
-             {
-            name: element.id,
-            left: element.placement.x,
-            top: element.placement.y,
-            scaleX: element.placement.scaleX,
-            scaleY: element.placement.scaleY,
-            width: element.properties.width,
-            height: element.properties.height,
-            angle: element.placement.rotation,
-            fill: element.properties.fill,
-            stroke: element.properties.stroke,
-            strokeWidth: element.properties.strokeWidth,
-            objectCaching: false,
-            selectable: true,
-            lockUniScaling: true,
-          });
+            {
+              name: element.id,
+              left: element.placement.x,
+              top: element.placement.y,
+              scaleX: element.placement.scaleX,
+              scaleY: element.placement.scaleY,
+              width: element.properties.width,
+              height: element.properties.height,
+              angle: element.placement.rotation,
+              fill: element.properties.fill,
+              stroke: element.properties.stroke,
+              strokeWidth: element.properties.strokeWidth,
+              objectCaching: false,
+              selectable: true,
+              lockUniScaling: true,
+            });
           element.fabricObject = rhoObject;
           canvas.add(rhoObject);
           canvas.on("object:modified", function (e) {
@@ -1684,22 +1590,22 @@ export class Store {
               { x: 30, y: 50 },
               { x: -30, y: 50 }
             ],
-             {
-            name: element.id,
-            left: element.placement.x,
-            top: element.placement.y,
-            scaleX: element.placement.scaleX,
-            scaleY: element.placement.scaleY,
-            width: element.properties.width,
-            height: element.properties.height,
-            angle: element.placement.rotation,
-            fill: element.properties.fill,
-            stroke: element.properties.stroke,
-            strokeWidth: element.properties.strokeWidth,
-            objectCaching: false,
-            selectable: true,
-            lockUniScaling: true,
-          });
+            {
+              name: element.id,
+              left: element.placement.x,
+              top: element.placement.y,
+              scaleX: element.placement.scaleX,
+              scaleY: element.placement.scaleY,
+              width: element.properties.width,
+              height: element.properties.height,
+              angle: element.placement.rotation,
+              fill: element.properties.fill,
+              stroke: element.properties.stroke,
+              strokeWidth: element.properties.strokeWidth,
+              objectCaching: false,
+              selectable: true,
+              lockUniScaling: true,
+            });
           element.fabricObject = traObject;
           canvas.add(traObject);
           canvas.on("object:modified", function (e) {
@@ -1733,22 +1639,22 @@ export class Store {
               { x: 50, y: 50 },
               { x: -30, y: 50 }
             ],
-             {
-            name: element.id,
-            left: element.placement.x,
-            top: element.placement.y,
-            scaleX: element.placement.scaleX,
-            scaleY: element.placement.scaleY,
-            width: element.properties.width,
-            height: element.properties.height,
-            angle: element.placement.rotation,
-            fill: element.properties.fill,
-            stroke: element.properties.stroke,
-            strokeWidth: element.properties.strokeWidth,
-            objectCaching: false,
-            selectable: true,
-            lockUniScaling: true,
-          });
+            {
+              name: element.id,
+              left: element.placement.x,
+              top: element.placement.y,
+              scaleX: element.placement.scaleX,
+              scaleY: element.placement.scaleY,
+              width: element.properties.width,
+              height: element.properties.height,
+              angle: element.placement.rotation,
+              fill: element.properties.fill,
+              stroke: element.properties.stroke,
+              strokeWidth: element.properties.strokeWidth,
+              objectCaching: false,
+              selectable: true,
+              lockUniScaling: true,
+            });
           element.fabricObject = paraObject;
           canvas.add(paraObject);
           canvas.on("object:modified", function (e) {
@@ -1777,23 +1683,23 @@ export class Store {
         case "ellipse": {
           const elipObject = new fabric.Ellipse(
             {
-            name: element.id,
-            rx: 50,
-            ry: 25,
-            left: element.placement.x,
-            top: element.placement.y,
-            scaleX: element.placement.scaleX,
-            scaleY: element.placement.scaleY,
-            width: element.properties.width,
-            height: element.properties.height,
-            angle: element.placement.rotation,
-            fill: element.properties.fill,
-            stroke: element.properties.stroke,
-            strokeWidth: element.properties.strokeWidth,
-            objectCaching: false,
-            selectable: true,
-            lockUniScaling: true,
-          });
+              name: element.id,
+              rx: 50,
+              ry: 25,
+              left: element.placement.x,
+              top: element.placement.y,
+              scaleX: element.placement.scaleX,
+              scaleY: element.placement.scaleY,
+              width: element.properties.width,
+              height: element.properties.height,
+              angle: element.placement.rotation,
+              fill: element.properties.fill,
+              stroke: element.properties.stroke,
+              strokeWidth: element.properties.strokeWidth,
+              objectCaching: false,
+              selectable: true,
+              lockUniScaling: true,
+            });
           element.fabricObject = elipObject;
           canvas.add(elipObject);
           canvas.on("object:modified", function (e) {
@@ -1822,23 +1728,23 @@ export class Store {
         case "oval": {
           const ovaObject = new fabric.Ellipse(
             {
-            name: element.id,
-            rx: 75,
-            ry: 40,
-            left: element.placement.x,
-            top: element.placement.y,
-            scaleX: element.placement.scaleX,
-            scaleY: element.placement.scaleY,
-            width: element.properties.width,
-            height: element.properties.height,
-            angle: element.placement.rotation,
-            fill: element.properties.fill,
-            stroke: element.properties.stroke,
-            strokeWidth: element.properties.strokeWidth,
-            objectCaching: false,
-            selectable: true,
-            lockUniScaling: true,
-          });
+              name: element.id,
+              rx: 75,
+              ry: 40,
+              left: element.placement.x,
+              top: element.placement.y,
+              scaleX: element.placement.scaleX,
+              scaleY: element.placement.scaleY,
+              width: element.properties.width,
+              height: element.properties.height,
+              angle: element.placement.rotation,
+              fill: element.properties.fill,
+              stroke: element.properties.stroke,
+              strokeWidth: element.properties.strokeWidth,
+              objectCaching: false,
+              selectable: true,
+              lockUniScaling: true,
+            });
           element.fabricObject = ovaObject;
           canvas.add(ovaObject);
           canvas.on("object:modified", function (e) {
@@ -1867,21 +1773,21 @@ export class Store {
         case "star": {
           const starObject = new fabric.Path('M 100 0 L 125 50 L 200 50 L 150 90 L 175 150 L 100 120 L 25 150 L 50 90 L 0 50 L 75 50 Z',
             {
-            name: element.id,
-            left: element.placement.x,
-            top: element.placement.y,
-            scaleX: element.placement.scaleX,
-            scaleY: element.placement.scaleY,
-            width: element.properties.width,
-            height: element.properties.height,
-            angle: element.placement.rotation,
-            fill: element.properties.fill,
-            stroke: element.properties.stroke,
-            strokeWidth: element.properties.strokeWidth,
-            objectCaching: false,
-            selectable: true,
-            lockUniScaling: true,
-          });
+              name: element.id,
+              left: element.placement.x,
+              top: element.placement.y,
+              scaleX: element.placement.scaleX,
+              scaleY: element.placement.scaleY,
+              width: element.properties.width,
+              height: element.properties.height,
+              angle: element.placement.rotation,
+              fill: element.properties.fill,
+              stroke: element.properties.stroke,
+              strokeWidth: element.properties.strokeWidth,
+              objectCaching: false,
+              selectable: true,
+              lockUniScaling: true,
+            });
           element.fabricObject = starObject;
           canvas.add(starObject);
           canvas.on("object:modified", function (e) {
@@ -1910,21 +1816,21 @@ export class Store {
         case "heart": {
           const heartObject = new fabric.Path('M 100 0 A 20 20 0 0 1 100 40 A 20 20 0 0 1 100 80 Q 100 100 80 120 A 20 20 0 0 1 60 120 A 20 20 0 0 1 20 80 Q 0 60 0 40 A 20 20 0 0 1 20 0 Q 50 -20 100 0 Z',
             {
-            name: element.id,
-            left: element.placement.x,
-            top: element.placement.y,
-            scaleX: element.placement.scaleX,
-            scaleY: element.placement.scaleY,
-            width: element.properties.width,
-            height: element.properties.height,
-            angle: element.placement.rotation,
-            fill: element.properties.fill,
-            stroke: element.properties.stroke,
-            strokeWidth: element.properties.strokeWidth,
-            objectCaching: false,
-            selectable: true,
-            lockUniScaling: true,
-          });
+              name: element.id,
+              left: element.placement.x,
+              top: element.placement.y,
+              scaleX: element.placement.scaleX,
+              scaleY: element.placement.scaleY,
+              width: element.properties.width,
+              height: element.properties.height,
+              angle: element.placement.rotation,
+              fill: element.properties.fill,
+              stroke: element.properties.stroke,
+              strokeWidth: element.properties.strokeWidth,
+              objectCaching: false,
+              selectable: true,
+              lockUniScaling: true,
+            });
           element.fabricObject = heartObject;
           canvas.add(heartObject);
           canvas.on("object:modified", function (e) {
