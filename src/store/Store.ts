@@ -939,7 +939,7 @@ export class Store {
     const canvas = this.canvas;
     if (!canvas) return;
 
-     const jsonData = {
+    const jsonData = {
       templateFile: JSON.stringify(canvas.toJSON([
         "transparentCorners",
         "cornerColor",
