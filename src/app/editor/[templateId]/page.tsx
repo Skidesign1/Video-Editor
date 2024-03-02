@@ -7,62 +7,94 @@ import { StoreProvider } from "@/store";
 import { Editor } from "../../../components/Editor";
 
 
-function EditorPage( ) {
+function EditorPage() {
 
-    const params = useParams<{ templateId: string }>()
-    const searchParams = useSearchParams()
-    const userId = searchParams.get('userId')
-    const token = searchParams.get('token')
-    if (token) {
-      window.sessionStorage.setItem('token', token);
-    }
-   if (userId) {
+  const params = useParams<{ templateId: string }>()
+  const searchParams = useSearchParams()
+  const userId = searchParams.get('userId')
+  const token = searchParams.get('token')
+  if (token) {
+    window.sessionStorage.setItem('token', token);
+  }
+  if (userId) {
     window.sessionStorage.setItem('userId', userId);
   }
   if (params.templateId) {
     window.sessionStorage.setItem('templateId', params.templateId);
   }
-    const [templateInfo, setTemplateInfo] = useState(null);
-    const [userInfo, setUserInfo] = useState(null);
-  
-    useEffect(() => {
-      const fetchTemplateInfo = async () => {
-        try {
-          // Make a POST request to fetch template info using the provided id
-          const response = await axios.get(`https://skyestudio-backend.onrender.com/templates/${params.templateId}`);
-          console.log(response)
-          setTemplateInfo(response.data);
-        } catch (error) {
-          console.error('Error fetching template info:', error);
-        }
-      };
+  const [templateInfo, setTemplateInfo] = useState(null);
+  const [userInfo, setUserInfo] = useState(null);
 
-      const userId = window.sessionStorage.getItem('userId');
-      const fetchUserInfo = async () => {
-        try {
-          // Make a POST request to fetch user info using the provided id
-          const response = await axios.get(`https://skyestudio-backend.onrender.com/user/profile`);
-          console.log(response)
-          setUserInfo(response.data);
-        } catch (error) {
-          console.error('Error fetching user info:', error);
-        }
-      };
-  
-      if (params.templateId) {
-        fetchTemplateInfo();
-      }
+  useEffect(() => {
+    const fetchTemplateInfo = async () => {
+      try {
 
-      if (userId) {
-        fetchUserInfo();
+        const token = window.sessionStorage.getItem('token');
+
+        // Check if token exists
+        if (!token) {
+          // Handle case where token is not available
+          console.error('Token not found in session.');
+          return;
+        }
+
+        // Define request headers with Authorization header containing the token
+        const config = {
+          headers: {
+            Authorization: `${token}`,
+          },
+        };
+        // Make a POST request to fetch template info using the provided id
+        const response = await axios.get(`https://skyestudio-backend.onrender.com/templates/${params.templateId}`, config);
+        console.log(response)
+        setTemplateInfo(response.data);
+      } catch (error) {
+        console.error('Error fetching template info:', error);
       }
-    }, [params.templateId, userId]);
+    };
+
+    const userId = window.sessionStorage.getItem('userId');
+    const fetchUserInfo = async () => {
+      try {
+        const token = window.sessionStorage.getItem('token');
+
+        // Check if token exists
+        if (!token) {
+          // Handle case where token is not available
+          console.error('Token not found in session.');
+          return;
+        }
+
+        // Define request headers with Authorization header containing the token
+        const config = {
+          headers: {
+            Authorization: `${token}`,
+          },
+        };
+
+        // Make a POST request to fetch user info using the provided id
+        const response = await axios.get(`https://skyestudio-backend.onrender.com/user/profile`, config);
+        console.log(response)
+        setUserInfo(response.data);
+      } catch (error) {
+        console.error('Error fetching user info:', error);
+      }
+    };
+
+    if (params.templateId) {
+      fetchTemplateInfo();
+    }
+
+    if (userId) {
+      fetchUserInfo();
+    }
+  }, [params.templateId, userId]);
 
   return (
     userId &&
     <StoreProvider>
       <p className=" ml-5"><img src="/favicon.png" className="h-[40px] w-[40px] ml-5 mt-5" /> Skye Studio</p>
-      <Editor/>
+      <Editor />
     </StoreProvider>
   );
 }
