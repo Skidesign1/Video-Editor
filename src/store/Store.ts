@@ -958,7 +958,7 @@ export class Store {
     const token = window.sessionStorage.getItem("token")
     // Send JSON data to backend URL
     fetch(`https://skyestudio-backend.onrender.com/creatives/designs/${templateId}/update`, {
-      method: "POST",
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
         "Authorization": `${token}`,
@@ -1006,7 +1006,7 @@ export class Store {
     const token = window.sessionStorage.getItem("token")
     // Send JSON data to backend URL
     fetch(`https://skyestudio-backend.onrender.com/creatives/designs/${templateId}/update`, {
-      method: "POST",
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
         "Authorization": `${token}`,
