@@ -5,10 +5,19 @@ import anime, { get } from 'animejs';
 import { MenuOption, EditorElement, Animation, TimeFrame, VideoEditorElement, ShapeEditorElement, AudioEditorElement, Placement, ImageEditorElement, Effect, TextEditorElement } from '../types';
 import { FabricUitls } from '@/utils/fabric-utils';
 
+interface TemplateInfo {
+  Name?: string;
+  Category?: string;
+  isPublished?: boolean;
+}
+
+
 export class Store {
   canvas: fabric.Canvas | null
 
   backgroundColor: string;
+  templateInfo: TemplateInfo
+  userInfo: object
 
   selectedMenuOption: MenuOption;
   audios: string[]
@@ -32,6 +41,8 @@ export class Store {
     this.images = [];
     this.audios = [];
     this.shapes = [];
+    this.templateInfo = {};
+    this.userInfo = {};
     this.editorElements = [];
     this.backgroundColor = '#111111';
     this.maxTime = 30 * 1000;
@@ -61,6 +72,18 @@ export class Store {
     this.canvas = canvas;
     if (canvas) {
       canvas.backgroundColor = this.backgroundColor;
+    }
+  }
+
+  setTemplateInfo(templateInfo: object) {
+    if (templateInfo) {
+      this.templateInfo = templateInfo;
+    }
+  }
+
+  setUserInfo(userInfo: object) {
+    if (userInfo) {
+      this.userInfo = userInfo;
     }
   }
 
@@ -988,7 +1011,7 @@ export class Store {
 
     const canvas = this.canvas;
     if (!canvas) return;
-    const jsonData = {
+    const jsonData= {
       templateFile: JSON.stringify(canvas.toJSON([
         "transparentCorners",
         "cornerColor",
@@ -1001,6 +1024,9 @@ export class Store {
         "level",
         "splitByGrapheme",
       ])),
+      Name: this.templateInfo?.Name,
+      Category: this.templateInfo?.Category,
+      isPublished:  this.templateInfo?.isPublished,
     };
     const templateId = window.sessionStorage.getItem("templateId")
     const token = window.sessionStorage.getItem("token")

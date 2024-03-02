@@ -1,13 +1,16 @@
 "use client"
+import React from "react";
 import { useParams } from 'next/navigation'
 import { useSearchParams } from 'next/navigation'
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { StoreProvider } from "@/store";
+import { StoreContext } from "@/store";
 import { Editor } from "../../../components/Editor";
 
 
 function EditorPage() {
+  const store = React.useContext(StoreContext);
 
   const params = useParams<{ templateId: string }>()
   const searchParams = useSearchParams()
@@ -22,8 +25,6 @@ function EditorPage() {
   if (params.templateId) {
     window.sessionStorage.setItem('templateId', params.templateId);
   }
-  const [templateInfo, setTemplateInfo] = useState(null);
-  const [userInfo, setUserInfo] = useState(null);
 
   useEffect(() => {
     const fetchTemplateInfo = async () => {
@@ -47,7 +48,7 @@ function EditorPage() {
         // Make a POST request to fetch template info using the provided id
         const response = await axios.get(`https://skyestudio-backend.onrender.com/templates/${params.templateId}`, config);
         console.log(response)
-        setTemplateInfo(response.data);
+        store?.setTemplateInfo(response.data);
       } catch (error) {
         console.error('Error fetching template info:', error);
       }
@@ -75,7 +76,7 @@ function EditorPage() {
         // Make a POST request to fetch user info using the provided id
         const response = await axios.get(`https://skyestudio-backend.onrender.com/user/profile`, config);
         console.log(response)
-        setUserInfo(response.data);
+        store?.setUserInfo(response.data);
       } catch (error) {
         console.error('Error fetching user info:', error);
       }
