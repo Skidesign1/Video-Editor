@@ -1020,6 +1020,8 @@ export class Store {
         } else {
           console.error("Failed to send video to backend");
           alert("Error saving video.")
+          console.log(JSON.stringify(jsonData))
+          console.log(jsonData)
         }
       })
       .catch(error => {
