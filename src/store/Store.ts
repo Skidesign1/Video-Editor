@@ -9,6 +9,8 @@ interface TemplateInfo {
   Name?: string;
   Category?: string;
   isPublished?: boolean;
+  Type?: string;
+  Platform?: string;
 }
 
 
@@ -962,6 +964,8 @@ export class Store {
     const canvas = this.canvas;
     if (!canvas) return;
 
+    const userId = window.sessionStorage.getItem("userId")
+
     const jsonData = {
       templateFile: JSON.stringify(canvas.toJSON([
         "transparentCorners",
@@ -976,6 +980,11 @@ export class Store {
         "splitByGrapheme",
       ])),
       isPublished: true,
+      Name: this.templateInfo?.Name,
+      Category: this.templateInfo?.Category,
+      Platform: this.templateInfo?.Platform,
+      Type: this.templateInfo?.Type,
+      userId: userId
     };
     const templateId = window.sessionStorage.getItem("templateId")
     const token = window.sessionStorage.getItem("token")
@@ -1011,6 +1020,7 @@ export class Store {
 
     const canvas = this.canvas;
     if (!canvas) return;
+    const userId = window.sessionStorage.getItem("userId")
     const jsonData= {
       templateFile: JSON.stringify(canvas.toJSON([
         "transparentCorners",
@@ -1027,6 +1037,9 @@ export class Store {
       Name: this.templateInfo?.Name,
       Category: this.templateInfo?.Category,
       isPublished:  this.templateInfo?.isPublished,
+      Platform: this.templateInfo?.Platform,
+      Type: this.templateInfo?.Type,
+      userId: userId
     };
     const templateId = window.sessionStorage.getItem("templateId")
     const token = window.sessionStorage.getItem("token")
