@@ -1057,11 +1057,8 @@ export class Store {
           console.log("Video sent successfully to backend");
           alert("Video saved successfully!");
         } else {
-          console.log(response)
           console.error("Failed to send video to backend");
           alert("Error saving video.")
-          console.log(JSON.stringify(jsonData))
-          console.log(jsonData)
         }
       })
       .catch(error => {
